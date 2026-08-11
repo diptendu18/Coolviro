@@ -99,6 +99,7 @@ export default function MobileMenu({ open, onClose }) {
           z-index: 200;
           visibility: hidden;
           pointer-events: none;
+          overflow: hidden;
         }
         .mobile-menu.is-open {
           visibility: visible;
@@ -123,7 +124,8 @@ export default function MobileMenu({ open, onClose }) {
           top: 0;
           right: 0;
           height: 100%;
-          width: min(340px, 88vw);
+          width: 88vw;
+          max-width: 340px;
           background: #fff;
           box-shadow: var(--shadow-lg);
           padding: var(--space-5);

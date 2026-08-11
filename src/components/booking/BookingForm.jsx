@@ -340,6 +340,8 @@ export default function BookingForm() {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: var(--space-5);
+          min-width: 0;
+          max-width: 100%;
         }
         .hp-field {
           position: absolute;
@@ -353,6 +355,7 @@ export default function BookingForm() {
           display: flex;
           flex-direction: column;
           gap: var(--space-2);
+          min-width: 0;
         }
         .form-field-full {
           grid-column: 1 / -1;
@@ -371,6 +374,9 @@ export default function BookingForm() {
           border: 1.5px solid var(--color-border);
           background: #fff;
           color: var(--color-text);
+          width: 100%;
+          min-width: 0;
+          max-width: 100%;
         }
         input:focus,
         select:focus,

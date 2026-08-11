@@ -90,6 +90,36 @@ button {
   font-family: inherit;
 }
 
+/*
+ * Root-cause fix for mobile overflow: native form controls (especially
+ * <select>, whose intrinsic width is driven by its widest <option> text)
+ * default to `min-width: auto`, which stops them from shrinking below
+ * their content's natural width inside a flex/grid item. On a narrow
+ * viewport this silently forces the control — and everything stacked
+ * above/around it — wider than the screen. Applying box-sizing (above),
+ * width:100%, and min-width:0 here means every form control site-wide
+ * always shrinks to fit its container instead of overriding it.
+ */
+input,
+select,
+textarea,
+button {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/*
+ * Same root cause, one level up: a CSS grid item defaults to
+ * `min-width: auto`, so a child with unshrinkable intrinsic content
+ * (e.g. a form control) can force the whole row/column wider than its
+ * container even when the track is `1fr`. Grid items are shrinkable by
+ * default site-wide; anything that intentionally needs to keep its
+ * natural width sets its own explicit min-width.
+ */
+.grid > * {
+  min-width: 0;
+}
+
 h1,
 h2,
 h3,

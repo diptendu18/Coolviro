@@ -6,7 +6,18 @@ const INDIAN_MOBILE_REGEX = /^[6-9]\d{9}$/;
 const INDIAN_PINCODE_REGEX = /^[1-9]\d{5}$/;
 
 export function normalizeMobile(value) {
-  return (value || '').replace(/[\s-]/g, '').replace(/^(\+?91)/, '');
+  const digits = (value || '').replace(/[\s-]/g, '');
+  // Only strip a country code when its presence is unambiguous (either a
+  // literal "+91" prefix, or exactly 12 digits i.e. "91" + a 10-digit
+  // number) — otherwise a valid 10-digit number that happens to start
+  // with "91" (e.g. 9123456780) would be incorrectly mangled.
+  if (digits.startsWith('+91') && digits.length === 13) {
+    return digits.slice(3);
+  }
+  if (digits.startsWith('91') && digits.length === 12) {
+    return digits.slice(2);
+  }
+  return digits;
 }
 
 export function validateName(value) {
