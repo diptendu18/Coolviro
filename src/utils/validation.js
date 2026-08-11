@@ -1,0 +1,82 @@
+// Shared validation used by both the client-side booking form and the
+// server-side API route. Keep this file dependency-free so it can be
+// imported from pages/api without pulling in browser-only code.
+
+const INDIAN_MOBILE_REGEX = /^[6-9]\d{9}$/;
+const INDIAN_PINCODE_REGEX = /^[1-9]\d{5}$/;
+
+export function normalizeMobile(value) {
+  return (value || '').replace(/[\s-]/g, '').replace(/^(\+?91)/, '');
+}
+
+export function validateName(value) {
+  const v = (value || '').trim();
+  if (!v) return 'Please enter your name.';
+  if (v.length < 2) return 'Please enter your full name.';
+  if (v.length > 60) return 'Name is too long.';
+  if (!/^[a-zA-Z .'-]+$/.test(v)) return 'Name can only contain letters and spaces.';
+  return '';
+}
+
+export function validateMobile(value) {
+  const v = normalizeMobile(value);
+  if (!v) return 'Please enter your mobile number.';
+  if (!INDIAN_MOBILE_REGEX.test(v)) {
+    return 'Please enter a valid 10-digit Indian mobile number.';
+  }
+  return '';
+}
+
+export function validateService(value, serviceOptions) {
+  if (!value) return 'Please select a service.';
+  if (!serviceOptions.includes(value)) return 'Please select a valid service.';
+  return '';
+}
+
+export function validateApplianceType(value, allowedTypes) {
+  if (!value) return 'Please select the appliance type.';
+  if (!allowedTypes || !allowedTypes.includes(value)) {
+    return 'Please select a valid appliance type.';
+  }
+  return '';
+}
+
+export function validatePincode(value) {
+  const v = (value || '').trim();
+  if (!v) return 'Please enter your pincode.';
+  if (!INDIAN_PINCODE_REGEX.test(v)) return 'Please enter a valid 6-digit pincode.';
+  return '';
+}
+
+export function validateAddress(value) {
+  const v = (value || '').trim();
+  if (!v) return 'Please enter your address.';
+  if (v.length < 10) return 'Please enter your complete address (at least 10 characters).';
+  if (v.length > 300) return 'Address is too long.';
+  return '';
+}
+
+export function validateBookingForm(values, { serviceOptions, applianceTypesByServiceName }) {
+  const errors = {};
+
+  const nameError = validateName(values.name);
+  if (nameError) errors.name = nameError;
+
+  const mobileError = validateMobile(values.mobile);
+  if (mobileError) errors.mobile = mobileError;
+
+  const serviceError = validateService(values.service, serviceOptions);
+  if (serviceError) errors.service = serviceError;
+
+  const allowedTypes = applianceTypesByServiceName[values.service] || [];
+  const applianceError = validateApplianceType(values.applianceType, allowedTypes);
+  if (applianceError) errors.applianceType = applianceError;
+
+  const pincodeError = validatePincode(values.pincode);
+  if (pincodeError) errors.pincode = pincodeError;
+
+  const addressError = validateAddress(values.address);
+  if (addressError) errors.address = addressError;
+
+  return errors;
+}
