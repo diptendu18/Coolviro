@@ -39,12 +39,8 @@ function buildEmailContent(booking) {
     ...(booking.brand === OTHER_BRAND_VALUE && booking.brandOther
       ? [['Brand Name', booking.brandOther]]
       : []),
-    ['Problem / Service Required', booking.problemDescription],
     ['Address', booking.address],
     ['Pincode', booking.pincode],
-    ['Preferred Date', booking.preferredDate],
-    ['Preferred Time', booking.preferredTime],
-    ...(booking.additionalMessage ? [['Additional Message', booking.additionalMessage]] : []),
   ];
 
   const text = rows.map(([label, value]) => `${label}: ${value}`).join('\n');

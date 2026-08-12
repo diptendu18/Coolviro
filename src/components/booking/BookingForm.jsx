@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { serviceNameOptions, applianceTypesByServiceName, brandsByServiceName } from '@/data/services';
-import { validateBookingForm, OTHER_BRAND_VALUE, TIME_SLOTS } from '@/utils/validation';
+import { validateBookingForm, OTHER_BRAND_VALUE } from '@/utils/validation';
 import { AlertIcon, CheckIcon } from '@/components/ui/Icons';
 
 const EMPTY_FORM = {
@@ -11,21 +11,10 @@ const EMPTY_FORM = {
   brand: '',
   brandOther: '',
   applianceType: '',
-  problemDescription: '',
   address: '',
   pincode: '',
-  preferredDate: '',
-  preferredTime: '',
-  additionalMessage: '',
   company: '', // honeypot — must stay empty
 };
-
-function todayIsoDate() {
-  const now = new Date();
-  const offset = now.getTimezoneOffset();
-  const local = new Date(now.getTime() - offset * 60000);
-  return local.toISOString().slice(0, 10);
-}
 
 export default function BookingForm() {
   const router = useRouter();
@@ -126,11 +115,8 @@ export default function BookingForm() {
       brand: true,
       brandOther: true,
       applianceType: true,
-      problemDescription: true,
       address: true,
       pincode: true,
-      preferredDate: true,
-      preferredTime: true,
     });
 
     if (Object.keys(fieldErrors).length > 0) {
@@ -378,28 +364,7 @@ export default function BookingForm() {
       </div>
 
       <div className="form-field form-field-full">
-        <label htmlFor="problemDescription">Problem / Service Required</label>
-        <textarea
-          id="problemDescription"
-          name="problemDescription"
-          rows={3}
-          placeholder="Briefly describe the issue or the service you need"
-          value={values.problemDescription}
-          onChange={(e) => handleChange('problemDescription', e.target.value)}
-          onBlur={() => handleBlur('problemDescription')}
-          aria-invalid={touched.problemDescription && !!errors.problemDescription}
-          aria-describedby={errors.problemDescription ? 'problemDescription-error' : undefined}
-          required
-        />
-        {touched.problemDescription && errors.problemDescription && (
-          <p className="field-error" id="problemDescription-error">
-            <AlertIcon /> {errors.problemDescription}
-          </p>
-        )}
-      </div>
-
-      <div className="form-field form-field-full">
-        <label htmlFor="address">Full Address</label>
+        <label htmlFor="address">Address</label>
         <textarea
           id="address"
           name="address"
@@ -438,73 +403,6 @@ export default function BookingForm() {
         {touched.pincode && errors.pincode && (
           <p className="field-error" id="pincode-error">
             <AlertIcon /> {errors.pincode}
-          </p>
-        )}
-      </div>
-
-      <div className="form-field">
-        <label htmlFor="preferredDate">Preferred Date</label>
-        <input
-          id="preferredDate"
-          name="preferredDate"
-          type="date"
-          min={todayIsoDate()}
-          value={values.preferredDate}
-          onChange={(e) => handleChange('preferredDate', e.target.value)}
-          onBlur={() => handleBlur('preferredDate')}
-          aria-invalid={touched.preferredDate && !!errors.preferredDate}
-          aria-describedby={errors.preferredDate ? 'preferredDate-error' : undefined}
-          required
-        />
-        {touched.preferredDate && errors.preferredDate && (
-          <p className="field-error" id="preferredDate-error">
-            <AlertIcon /> {errors.preferredDate}
-          </p>
-        )}
-      </div>
-
-      <div className="form-field">
-        <label htmlFor="preferredTime">Preferred Time</label>
-        <select
-          id="preferredTime"
-          name="preferredTime"
-          value={values.preferredTime}
-          onChange={(e) => handleChange('preferredTime', e.target.value)}
-          onBlur={() => handleBlur('preferredTime')}
-          aria-invalid={touched.preferredTime && !!errors.preferredTime}
-          aria-describedby={errors.preferredTime ? 'preferredTime-error' : undefined}
-          required
-        >
-          <option value="">Select a time slot</option>
-          {TIME_SLOTS.map((slot) => (
-            <option key={slot} value={slot}>
-              {slot}
-            </option>
-          ))}
-        </select>
-        {touched.preferredTime && errors.preferredTime && (
-          <p className="field-error" id="preferredTime-error">
-            <AlertIcon /> {errors.preferredTime}
-          </p>
-        )}
-      </div>
-
-      <div className="form-field form-field-full">
-        <label htmlFor="additionalMessage">Additional Message (Optional)</label>
-        <textarea
-          id="additionalMessage"
-          name="additionalMessage"
-          rows={3}
-          placeholder="Anything else you'd like us to know"
-          value={values.additionalMessage}
-          onChange={(e) => handleChange('additionalMessage', e.target.value)}
-          onBlur={() => handleBlur('additionalMessage')}
-          aria-invalid={touched.additionalMessage && !!errors.additionalMessage}
-          aria-describedby={errors.additionalMessage ? 'additionalMessage-error' : undefined}
-        />
-        {touched.additionalMessage && errors.additionalMessage && (
-          <p className="field-error" id="additionalMessage-error">
-            <AlertIcon /> {errors.additionalMessage}
           </p>
         )}
       </div>
