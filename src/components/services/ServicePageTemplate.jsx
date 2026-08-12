@@ -8,7 +8,7 @@ import ServiceCard from '@/components/ui/ServiceCard';
 import FAQAccordion from '@/components/ui/FAQAccordion';
 import { CallButton, WhatsappButton, BookButton } from '@/components/ui/CTAButtons';
 import { CheckIcon, ShieldCheckIcon, ChevronRightIcon } from '@/components/ui/Icons';
-import { services, brandDisclaimer } from '@/data/services';
+import { services } from '@/data/services';
 import { slugifyBrand } from '@/data/brandPages';
 import { serviceAreas } from '@/data/site';
 
@@ -102,7 +102,6 @@ export default function ServicePageTemplate({ service }) {
                 </Link>
               ))}
             </div>
-            <p className="brand-disclaimer">{brandDisclaimer}</p>
           </div>
 
           <div className="card service-info-card service-areas-note">
@@ -247,11 +246,6 @@ export default function ServicePageTemplate({ service }) {
         }
         .chip-list :global(svg) {
           color: var(--color-primary);
-        }
-        .brand-disclaimer {
-          margin: var(--space-4) 0 0;
-          font-size: 0.82rem;
-          color: var(--color-text-muted);
         }
         .brand-logo-section {
           margin-top: var(--space-5);

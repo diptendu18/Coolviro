@@ -13,7 +13,6 @@ import {
   BadgeCheckIcon,
   DoorstepIcon,
 } from '@/components/ui/Icons';
-import { brandDisclaimer } from '@/data/services';
 import { serviceAreas } from '@/data/site';
 
 const TRUST_ITEMS = [
@@ -33,10 +32,6 @@ function buildFaqs(brand, service) {
     {
       q: `How much does ${brand} ${shortLower} service cost?`,
       a: `${brand} ${shortLower} service starts from ₹${service.startingPrice}. The final cost depends on the specific issue, parts required and inspection findings.`,
-    },
-    {
-      q: `Is Coolviro Services an authorized ${brand} service center?`,
-      a: `No — Coolviro Services is an independent provider and is not an authorized service center or official partner of ${brand}.`,
     },
     {
       q: `Do you provide a warranty on ${brand} ${shortLower} repair?`,
@@ -177,8 +172,6 @@ export default function BrandServicePageTemplate({ brandPage }) {
               {shortLower} issue, parts required and inspection findings.
             </p>
           </div>
-
-          <p className="brand-disclaimer">{brandDisclaimer}</p>
         </div>
       </section>
 
@@ -399,11 +392,6 @@ export default function BrandServicePageTemplate({ brandPage }) {
           font-weight: 800;
           color: var(--color-primary);
           margin: 0 0 var(--space-3);
-        }
-        .brand-disclaimer {
-          margin: var(--space-5) 0 0;
-          font-size: 0.82rem;
-          color: var(--color-text-muted);
         }
         .brand-trust-section {
           padding: var(--space-6) 0;
