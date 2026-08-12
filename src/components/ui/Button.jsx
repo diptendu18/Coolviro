@@ -4,7 +4,7 @@ const isInternal = (href = '') => href.startsWith('/') && !href.startsWith('//')
 
 /**
  * Polymorphic button/link. Renders a Next <Link> for internal routes
- * (e.g. "/#booking") and a plain <a> for tel:/https:// links, or a
+ * (e.g. "/booking") and a plain <a> for tel:/https:// links, or a
  * <button> when no href is given (for in-page actions like form submit).
  */
 export default function Button({

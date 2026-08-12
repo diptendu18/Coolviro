@@ -64,8 +64,12 @@ export default async function handler(req, res) {
     applianceType: sanitizeString(body.applianceType),
     brand: sanitizeString(body.brand),
     brandOther: sanitizeString(body.brandOther),
+    problemDescription: sanitizeString(body.problemDescription),
     pincode: sanitizeString(body.pincode),
     address: sanitizeString(body.address),
+    preferredDate: sanitizeString(body.preferredDate),
+    preferredTime: sanitizeString(body.preferredTime),
+    additionalMessage: sanitizeString(body.additionalMessage),
   };
 
   const errors = validateBookingForm(values, {

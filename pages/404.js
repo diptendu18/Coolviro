@@ -21,7 +21,7 @@ export default function NotFoundPage() {
             <Link href="/services" className="btn btn-secondary">
               View Services
             </Link>
-            <BookButton variant="whatsapp" href="/#booking" />
+            <BookButton variant="whatsapp" href="/booking" />
           </div>
         </div>
       </section>

@@ -91,6 +91,50 @@ export function validateAddress(value) {
   return '';
 }
 
+export function validateProblemDescription(value) {
+  const v = (value || '').trim();
+  if (!v) return 'Please describe the problem or service you need.';
+  if (v.length < 5) return 'Please provide a little more detail (at least 5 characters).';
+  if (v.length > 300) return 'This is too long (maximum 300 characters).';
+  return '';
+}
+
+const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
+export function validatePreferredDate(value) {
+  const v = (value || '').trim();
+  if (!v) return 'Please select a preferred date.';
+  if (!DATE_REGEX.test(v)) return 'Please select a valid date.';
+  const selected = new Date(`${v}T00:00:00`);
+  if (Number.isNaN(selected.getTime())) return 'Please select a valid date.';
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (selected < today) return 'Preferred date cannot be in the past.';
+  return '';
+}
+
+// Two-hour appointment windows within the site's working hours
+// (10:00 AM - 8:00 PM) — shown in the Preferred Time <select>.
+export const TIME_SLOTS = [
+  '10:00 AM - 12:00 PM',
+  '12:00 PM - 2:00 PM',
+  '2:00 PM - 4:00 PM',
+  '4:00 PM - 6:00 PM',
+  '6:00 PM - 8:00 PM',
+];
+
+export function validatePreferredTime(value) {
+  if (!value) return 'Please select a preferred time.';
+  if (!TIME_SLOTS.includes(value)) return 'Please select a valid time slot.';
+  return '';
+}
+
+export function validateAdditionalMessage(value) {
+  const v = (value || '').trim();
+  if (v.length > 300) return 'This is too long (maximum 300 characters).';
+  return '';
+}
+
 export function validateBookingForm(
   values,
   { serviceOptions, applianceTypesByServiceName, brandsByServiceName = {} }
@@ -122,6 +166,18 @@ export function validateBookingForm(
 
   const addressError = validateAddress(values.address);
   if (addressError) errors.address = addressError;
+
+  const problemError = validateProblemDescription(values.problemDescription);
+  if (problemError) errors.problemDescription = problemError;
+
+  const preferredDateError = validatePreferredDate(values.preferredDate);
+  if (preferredDateError) errors.preferredDate = preferredDateError;
+
+  const preferredTimeError = validatePreferredTime(values.preferredTime);
+  if (preferredTimeError) errors.preferredTime = preferredTimeError;
+
+  const additionalMessageError = validateAdditionalMessage(values.additionalMessage);
+  if (additionalMessageError) errors.additionalMessage = additionalMessageError;
 
   return errors;
 }

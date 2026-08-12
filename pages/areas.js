@@ -41,7 +41,7 @@ export default function AreasPage() {
                   Doorstep AC, refrigerator, geyser, microwave oven and
                   washing machine repair in {area}, {site.city}.
                 </p>
-                <Link href="/#booking" className="area-link">
+                <Link href="/booking" className="area-link">
                   Book a service in {area} →
                 </Link>
               </div>

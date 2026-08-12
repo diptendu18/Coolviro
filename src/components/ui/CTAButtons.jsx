@@ -48,7 +48,7 @@ export function BookButton({
   block,
   className,
   label = 'Book a Service',
-  href = '/#booking',
+  href = '/booking',
 }) {
   return (
     <Button

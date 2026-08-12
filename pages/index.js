@@ -5,7 +5,6 @@ import ServicesGrid from '@/components/home/ServicesGrid';
 import HowItWorks from '@/components/home/HowItWorks';
 import ServiceAreasPreview from '@/components/home/ServiceAreasPreview';
 import ReviewsSection from '@/components/home/ReviewsSection';
-import BookingSection from '@/components/booking/BookingSection';
 import FinalCTA from '@/components/home/FinalCTA';
 
 export default function HomePage() {
@@ -21,7 +20,6 @@ export default function HomePage() {
       <HowItWorks />
       <ServiceAreasPreview />
       <ReviewsSection />
-      <BookingSection />
       <FinalCTA />
       <TrustSection />
     </>

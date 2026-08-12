@@ -50,7 +50,7 @@ export default function BrandServicePageTemplate({ brandPage }) {
   const pageTitle = `${brand} ${service.shortName} Service & Repair in Kolkata`;
   const pageDescription = `${brand} ${shortLower} service and repair at your doorstep in Kolkata. Starting from ₹${service.startingPrice}, 1 Year Service Warranty. Book online, call or WhatsApp.`;
   const pagePath = `/services/${service.urlSegment}/${brandPage.brandSlug}`;
-  const bookHref = `/?service=${encodeURIComponent(service.name)}&brand=${encodeURIComponent(brand)}#booking`;
+  const bookHref = `/booking?service=${encodeURIComponent(service.name)}&brand=${encodeURIComponent(brand)}`;
   const whatsappMessage = `Hello Coolviro Services, I need ${brand} ${shortLower} service in Kolkata.`;
   const faqs = buildFaqs(brand, service);
   const schemaService = {

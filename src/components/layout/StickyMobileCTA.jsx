@@ -18,7 +18,7 @@ export default function StickyMobileCTA() {
         <WhatsappIcon />
         <span>WhatsApp</span>
       </a>
-      <Link href="/#booking" className="sticky-cta-item sticky-cta-primary">
+      <Link href="/booking" className="sticky-cta-item sticky-cta-primary">
         <CalendarCheckIcon width="20" height="20" />
         <span>Book</span>
       </Link>

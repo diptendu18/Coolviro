@@ -14,7 +14,7 @@ import { serviceAreas } from '@/data/site';
 
 export default function ServicePageTemplate({ service }) {
   const related = services.filter((s) => s.slug !== service.slug);
-  const bookHref = `/?service=${encodeURIComponent(service.name)}#booking`;
+  const bookHref = `/booking?service=${encodeURIComponent(service.name)}`;
 
   return (
     <>

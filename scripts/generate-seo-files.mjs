@@ -27,6 +27,7 @@ if (!isConfigured) {
 
 const staticRoutes = [
   '/',
+  '/booking',
   '/services',
   '/services/ac-service',
   '/services/refrigerator-service',
