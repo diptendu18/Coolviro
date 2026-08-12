@@ -34,6 +34,22 @@ export const services = [
       'Godrej',
       'Lloyd',
     ],
+    // Optional: only AC has real per-brand product images. When present,
+    // ServicePageTemplate renders an image-card grid for "Supported
+    // Brands" instead of the plain text-chip list used by every other
+    // service (which has no images and is intentionally unaffected).
+    brandLogos: [
+      { name: 'Daikin', image: '/images/brand/daikin-ac.webp' },
+      { name: 'LG', image: '/images/brand/lg-ac.webp' },
+      { name: 'Samsung', image: '/images/brand/samsung-ac.webp' },
+      { name: 'Voltas', image: '/images/brand/voltas-ac.webp' },
+      { name: 'Blue Star', image: '/images/brand/blue-star-ac.webp' },
+      { name: 'Carrier', image: '/images/brand/carrier-ac.webp' },
+      { name: 'Hitachi', image: '/images/brand/hitachi-ac.webp' },
+      { name: 'Panasonic', image: '/images/brand/panasonic-ac.webp' },
+      { name: 'Godrej', image: '/images/brand/godrej-ac.webp' },
+      { name: 'Lloyd', image: '/images/brand/lloyd-ac.webp' },
+    ],
     faqs: [
       {
         q: 'Which types of AC do you service?',

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import SEO from '@/components/seo/SEO';
 import ServiceSchema from '@/components/seo/ServiceSchema';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -63,8 +64,8 @@ export default function ServicePageTemplate({ service }) {
           </div>
           <p className="service-overview-text">{service.overview}</p>
 
-          <div className="grid grid-2 service-info-grid">
-            <div className="card service-info-card">
+          {service.brandLogos ? (
+            <div className="card service-info-card service-info-grid">
               <h3>Appliance Types We Service</h3>
               <ul className="chip-list">
                 {service.types.map((type) => (
@@ -74,16 +75,53 @@ export default function ServicePageTemplate({ service }) {
                 ))}
               </ul>
             </div>
-            <div className="card service-info-card">
+          ) : (
+            <div className="grid grid-2 service-info-grid">
+              <div className="card service-info-card">
+                <h3>Appliance Types We Service</h3>
+                <ul className="chip-list">
+                  {service.types.map((type) => (
+                    <li key={type}>
+                      <CheckIcon /> {type}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="card service-info-card">
+                <h3>Supported Brands</h3>
+                <ul className="chip-list chip-list--brands">
+                  {service.brands.map((brand) => (
+                    <li key={brand}>{brand}</li>
+                  ))}
+                </ul>
+                <p className="brand-disclaimer">{brandDisclaimer}</p>
+              </div>
+            </div>
+          )}
+
+          {service.brandLogos && (
+            <div className="card service-info-card brand-logo-section">
               <h3>Supported Brands</h3>
-              <ul className="chip-list chip-list--brands">
-                {service.brands.map((brand) => (
-                  <li key={brand}>{brand}</li>
+              <div className="brand-logo-grid">
+                {service.brandLogos.map((brand) => (
+                  <div className="brand-logo-card" key={brand.name}>
+                    <div className="brand-logo-card-img">
+                      <Image
+                        src={brand.image}
+                        alt={`${brand.name} split AC unit — Coolviro Services repairs ${brand.name} air conditioners in Kolkata`}
+                        width={700}
+                        height={400}
+                        loading="lazy"
+                        sizes="(max-width: 640px) 45vw, (max-width: 960px) 200px, 180px"
+                      />
+                    </div>
+                    <span className="brand-logo-card-name">{brand.name}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
               <p className="brand-disclaimer">{brandDisclaimer}</p>
             </div>
-          </div>
+          )}
 
           <div className="card service-info-card service-areas-note">
             <h3>Service Area</h3>
@@ -236,6 +274,63 @@ export default function ServicePageTemplate({ service }) {
           margin: var(--space-4) 0 0;
           font-size: 0.82rem;
           color: var(--color-text-muted);
+        }
+        .brand-logo-section {
+          margin-top: var(--space-5);
+        }
+        .brand-logo-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: var(--space-4);
+        }
+        .brand-logo-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--space-2);
+          min-width: 0;
+          padding: var(--space-4) var(--space-3);
+          background: #f8fafc;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .brand-logo-card:hover {
+          transform: translateY(-3px);
+          box-shadow: var(--shadow-md);
+          border-color: var(--color-secondary);
+        }
+        .brand-logo-card-img {
+          width: 100%;
+          aspect-ratio: 7 / 4;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .brand-logo-card-img :global(img) {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+        .brand-logo-card-name {
+          font-weight: 700;
+          font-size: 0.88rem;
+          color: var(--color-text);
+          text-align: center;
+        }
+        @media (max-width: 960px) {
+          .brand-logo-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+        @media (max-width: 640px) {
+          .brand-logo-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-3);
+          }
+          .brand-logo-card {
+            padding: var(--space-3) var(--space-2);
+          }
         }
         .service-areas-note {
           margin-top: var(--space-5);
