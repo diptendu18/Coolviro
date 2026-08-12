@@ -6,6 +6,7 @@
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { brandPages } from '../src/data/brandPages.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const publicDir = join(__dirname, '..', 'public');
@@ -40,9 +41,16 @@ const staticRoutes = [
   '/service-policy',
 ];
 
+// All 50 brand-specific service pages (5 appliance categories x 10 brands),
+// derived from the same data source that drives the pages themselves —
+// see pages/services/[category]/[brand].js and src/data/brandPages.js.
+const brandRoutes = brandPages.map(
+  (entry) => `/services/${entry.service.urlSegment}/${entry.brandSlug}`
+);
+
 const today = new Date().toISOString().split('T')[0];
 
-const urlEntries = staticRoutes
+const urlEntries = [...staticRoutes, ...brandRoutes]
   .map((route) => {
     const priority = route === '/' ? '1.0' : route.startsWith('/services/') ? '0.8' : '0.6';
     return `  <url>

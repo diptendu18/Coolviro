@@ -7,9 +7,11 @@
 export const services = [
   {
     slug: 'ac-service',
+    urlSegment: 'ac',
     name: 'AC Service & Repair',
     shortName: 'AC',
     icon: 'ac',
+    applianceNounPlural: 'air conditioners',
     startingPrice: 499,
     priceDisplay: 'Starting at ₹499',
     metaTitle: 'AC Repair & Service in Kolkata | Coolviro Services',
@@ -22,6 +24,19 @@ export const services = [
     overview:
       'Coolviro Services provides professional AC service and repair at your doorstep in Kolkata and nearby areas. Our technicians work on Split and Window air conditioners, helping with cooling issues, servicing and general repairs, so your AC runs reliably through the season.',
     types: ['Split', 'Window'],
+    serviceOptions: [
+      'AC Service',
+      'AC Repair',
+      'AC Installation',
+      'AC Uninstallation',
+      'Gas Filling',
+      'AC Deep Cleaning',
+      'PCB Repair',
+      'Compressor Repair/Replacement',
+      'Water Leakage Repair',
+      'Cooling Problem',
+      'AMC',
+    ],
     brands: [
       'Daikin',
       'LG',
@@ -34,10 +49,10 @@ export const services = [
       'Godrej',
       'Lloyd',
     ],
-    // Optional: only AC has real per-brand product images. When present,
-    // ServicePageTemplate renders an image-card grid for "Supported
-    // Brands" instead of the plain text-chip list used by every other
-    // service (which has no images and is intentionally unaffected).
+    // Optional: services with real per-brand product photos define
+    // `brandLogos`. When present, ServicePageTemplate renders an
+    // image-card grid for "Supported Brands" instead of the plain
+    // text-chip list used by services without photos.
     brandLogos: [
       { name: 'Daikin', image: '/images/brand/daikin-ac.webp' },
       { name: 'LG', image: '/images/brand/lg-ac.webp' },
@@ -75,9 +90,11 @@ export const services = [
   },
   {
     slug: 'refrigerator-service',
+    urlSegment: 'refrigerator',
     name: 'Refrigerator Service & Repair',
     shortName: 'Refrigerator',
     icon: 'fridge',
+    applianceNounPlural: 'refrigerators',
     startingPrice: 699,
     priceDisplay: 'Starting at ₹699',
     metaTitle: 'Refrigerator & Fridge Repair in Kolkata | Coolviro Services',
@@ -90,6 +107,19 @@ export const services = [
     overview:
       'Coolviro Services offers professional refrigerator service and repair at your doorstep in Kolkata and nearby areas. Our technicians work on Single Door, Double Door and Side-by-Side refrigerators to help resolve cooling and performance issues.',
     types: ['Single Door', 'Double Door', 'Side-by-Side'],
+    serviceOptions: [
+      'Refrigerator Service',
+      'Refrigerator Repair',
+      'Gas Filling',
+      'Cooling Problem',
+      'Compressor Repair/Replacement',
+      'PCB Repair',
+      'Door Seal/Gasket Replacement',
+      'Water Leakage Repair',
+      'Defrost Problem',
+      'Noise Problem',
+      'AMC',
+    ],
     brands: [
       'LG',
       'Samsung',
@@ -101,6 +131,18 @@ export const services = [
       'IFB',
       'Bosch',
       'Lloyd',
+    ],
+    brandLogos: [
+      { name: 'LG', image: '/images/brand/lg-fridge.webp' },
+      { name: 'Samsung', image: '/images/brand/samsung-fridge.webp' },
+      { name: 'Whirlpool', image: '/images/brand/whirlpool-fridge.webp' },
+      { name: 'Godrej', image: '/images/brand/godrej-fridge.webp' },
+      { name: 'Haier', image: '/images/brand/haier-fridge.webp' },
+      { name: 'Panasonic', image: '/images/brand/panasonic-fridge.webp' },
+      { name: 'Voltas Beko', image: '/images/brand/voltas-beko-fridge.webp' },
+      { name: 'IFB', image: '/images/brand/ifb-fridge.webp' },
+      { name: 'Bosch', image: '/images/brand/bosch-fridge.webp' },
+      { name: 'Lloyd', image: '/images/brand/lloyd-fridge.webp' },
     ],
     faqs: [
       {
@@ -127,9 +169,11 @@ export const services = [
   },
   {
     slug: 'geyser-service',
+    urlSegment: 'geyser',
     name: 'Geyser Service & Repair',
     shortName: 'Geyser',
     icon: 'geyser',
+    applianceNounPlural: 'geysers',
     startingPrice: 599,
     priceDisplay: 'Starting at ₹599',
     metaTitle: 'Geyser Repair & Service in Kolkata | Coolviro Services',
@@ -142,6 +186,18 @@ export const services = [
     overview:
       'Coolviro Services provides professional geyser service and repair at your doorstep in Kolkata and nearby areas. Our technicians work on Storage and Instant geysers to help resolve heating and performance issues.',
     types: ['Storage', 'Instant'],
+    serviceOptions: [
+      'Geyser Service',
+      'Geyser Repair',
+      'Geyser Installation',
+      'Geyser Uninstallation',
+      'Element/Heating Rod Replacement',
+      'Thermostat Repair',
+      'Water Leakage Repair',
+      'No Hot Water Problem',
+      'Tank Repair',
+      'AMC',
+    ],
     brands: [
       'AO Smith',
       'Racold',
@@ -153,6 +209,18 @@ export const services = [
       'Usha',
       'Hindware',
       'Venus',
+    ],
+    brandLogos: [
+      { name: 'AO Smith', image: '/images/brand/ao-smith-geyser.webp' },
+      { name: 'Racold', image: '/images/brand/racold-geyser.webp' },
+      { name: 'Havells', image: '/images/brand/havells-geyser.webp' },
+      { name: 'Bajaj', image: '/images/brand/bajaj-geyser.webp' },
+      { name: 'V-Guard', image: '/images/brand/v-guard-geyser.webp' },
+      { name: 'Crompton', image: '/images/brand/crompton-geyser.webp' },
+      { name: 'Orient Electric', image: '/images/brand/orient-electric-geyser.webp' },
+      { name: 'Usha', image: '/images/brand/usha-geyser.webp' },
+      { name: 'Hindware', image: '/images/brand/hindware-geyser.webp' },
+      { name: 'Venus', image: '/images/brand/venus-geyser.webp' },
     ],
     faqs: [
       {
@@ -179,9 +247,11 @@ export const services = [
   },
   {
     slug: 'microwave-oven-service',
+    urlSegment: 'microwave',
     name: 'Microwave Oven Service & Repair',
     shortName: 'Microwave Oven',
     icon: 'microwave',
+    applianceNounPlural: 'microwave ovens',
     startingPrice: 499,
     priceDisplay: 'Starting at ₹499',
     metaTitle: 'Microwave Oven Repair in Kolkata | Coolviro Services',
@@ -194,6 +264,18 @@ export const services = [
     overview:
       'Coolviro Services offers professional microwave oven service and repair at your doorstep in Kolkata and nearby areas. Our technicians work on Solo, Grill and Convection microwave ovens to help resolve heating and performance issues.',
     types: ['Solo', 'Grill', 'Convection'],
+    serviceOptions: [
+      'Microwave Service',
+      'Microwave Repair',
+      'Not Heating Problem',
+      'Turntable/Motor Repair',
+      'Door/Hinge Repair',
+      'PCB Repair',
+      'Magnetron Replacement',
+      'Sparking Problem',
+      'Display/Panel Repair',
+      'AMC',
+    ],
     brands: [
       'LG',
       'Samsung',
@@ -231,9 +313,11 @@ export const services = [
   },
   {
     slug: 'washing-machine-service',
+    urlSegment: 'washing-machine',
     name: 'Washing Machine Service & Repair',
     shortName: 'Washing Machine',
     icon: 'washingMachine',
+    applianceNounPlural: 'washing machines',
     startingPrice: 699,
     priceDisplay: 'Starting at ₹699',
     metaTitle: 'Washing Machine Repair in Kolkata | Coolviro Services',
@@ -246,6 +330,18 @@ export const services = [
     overview:
       'Coolviro Services provides professional washing machine service and repair at your doorstep in Kolkata and nearby areas. Our technicians work on Front Load, Top Load, Semi Automatic and Fully Automatic washing machines to help resolve performance issues.',
     types: ['Front Load', 'Top Load', 'Semi Automatic', 'Fully Automatic'],
+    serviceOptions: [
+      'Washing Machine Service',
+      'Washing Machine Repair',
+      'Washing Machine Installation',
+      'Washing Machine Uninstallation',
+      'Drum/Motor Repair',
+      'PCB Repair',
+      'Water Leakage Repair',
+      'Not Spinning/Draining Problem',
+      'Door Lock Repair',
+      'AMC',
+    ],
     brands: [
       'LG',
       'Samsung',
@@ -285,8 +381,18 @@ export const services = [
 
 export const getServiceBySlug = (slug) => services.find((s) => s.slug === slug);
 
+export const getServiceByUrlSegment = (urlSegment) =>
+  services.find((s) => s.urlSegment === urlSegment);
+
 export const applianceTypesByServiceName = services.reduce((acc, s) => {
   acc[s.name] = s.types;
+  return acc;
+}, {});
+
+// Brands available per service, keyed by service *name* (matches the
+// booking form's "service" <select>, which stores the display name).
+export const brandsByServiceName = services.reduce((acc, s) => {
+  acc[s.name] = s.brands;
   return acc;
 }, {});
 
@@ -294,3 +400,7 @@ export const serviceNameOptions = services.map((s) => s.name);
 
 export const brandDisclaimer =
   'We service appliances from a wide range of leading brands. Coolviro Services is an independent appliance repair service and is not an authorized service center or official partner of any brand named above.';
+
+// Required verbatim on every brand-specific service page.
+export const brandPageDisclaimer =
+  'Coolviro Services is an independent home appliance repair and service provider. We are not an authorized service center or official partner of the brand mentioned above.';

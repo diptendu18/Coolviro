@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { serviceNameOptions, applianceTypesByServiceName } from '@/data/services';
+import { serviceNameOptions, applianceTypesByServiceName, brandsByServiceName } from '@/data/services';
 import { validateBookingForm } from '@/utils/validation';
 import { AlertIcon, CheckIcon } from '@/components/ui/Icons';
 
@@ -9,6 +9,7 @@ const EMPTY_FORM = {
   mobile: '',
   service: '',
   applianceType: '',
+  brand: '',
   pincode: '',
   address: '',
   company: '', // honeypot — must stay empty
@@ -25,30 +26,46 @@ export default function BookingForm() {
 
   useEffect(() => {
     const presetService = router.query.service;
+    const presetBrand = router.query.brand;
     if (typeof presetService === 'string' && serviceNameOptions.includes(presetService)) {
-      setValues((v) => ({ ...v, service: presetService }));
+      setValues((v) => {
+        const next = { ...v, service: presetService };
+        const allowedBrands = brandsByServiceName[presetService] || [];
+        if (typeof presetBrand === 'string' && allowedBrands.includes(presetBrand)) {
+          next.brand = presetBrand;
+        }
+        return next;
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.query.service]);
+  }, [router.query.service, router.query.brand]);
 
   const applianceOptions = applianceTypesByServiceName[values.service] || [];
+  const brandOptions = brandsByServiceName[values.service] || [];
 
   function handleChange(field, value) {
     const nextValues = { ...values, [field]: value };
-    if (field === 'service') nextValues.applianceType = '';
+    if (field === 'service') {
+      nextValues.applianceType = '';
+      nextValues.brand = '';
+    }
     setValues(nextValues);
 
     // Re-validate immediately so a previously-shown error clears as soon as
     // the field becomes valid, even if the field never receives a blur
     // event (e.g. choosing a <select> option with a mouse).
     setErrors((e) => {
-      if (!(field in e) && !(field === 'service' && 'applianceType' in e)) return e;
+      if (!(field in e) && !(field === 'service' && ('applianceType' in e || 'brand' in e))) return e;
       const fieldErrors = validateBookingForm(nextValues, {
         serviceOptions: serviceNameOptions,
         applianceTypesByServiceName,
+        brandsByServiceName,
       });
       const nextErrors = { ...e, [field]: fieldErrors[field] };
-      if (field === 'service') nextErrors.applianceType = fieldErrors.applianceType;
+      if (field === 'service') {
+        nextErrors.applianceType = fieldErrors.applianceType;
+        nextErrors.brand = fieldErrors.brand;
+      }
       return nextErrors;
     });
   }
@@ -58,6 +75,7 @@ export default function BookingForm() {
     const fieldErrors = validateBookingForm(values, {
       serviceOptions: serviceNameOptions,
       applianceTypesByServiceName,
+      brandsByServiceName,
     });
     setErrors((e) => ({ ...e, [field]: fieldErrors[field] }));
   }
@@ -75,6 +93,7 @@ export default function BookingForm() {
     const fieldErrors = validateBookingForm(values, {
       serviceOptions: serviceNameOptions,
       applianceTypesByServiceName,
+      brandsByServiceName,
     });
     setErrors(fieldErrors);
     setTouched({
@@ -82,6 +101,7 @@ export default function BookingForm() {
       mobile: true,
       service: true,
       applianceType: true,
+      brand: true,
       pincode: true,
       address: true,
     });
@@ -275,6 +295,34 @@ export default function BookingForm() {
         {touched.applianceType && errors.applianceType && (
           <p className="field-error" id="applianceType-error">
             <AlertIcon /> {errors.applianceType}
+          </p>
+        )}
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="brand">Brand (Optional)</label>
+        <select
+          id="brand"
+          name="brand"
+          value={values.brand}
+          onChange={(e) => handleChange('brand', e.target.value)}
+          onBlur={() => handleBlur('brand')}
+          aria-invalid={touched.brand && !!errors.brand}
+          aria-describedby={errors.brand ? 'brand-error' : undefined}
+          disabled={!values.service}
+        >
+          <option value="">
+            {values.service ? 'Select brand (optional)' : 'Select a service first'}
+          </option>
+          {brandOptions.map((brand) => (
+            <option key={brand} value={brand}>
+              {brand}
+            </option>
+          ))}
+        </select>
+        {touched.brand && errors.brand && (
+          <p className="field-error" id="brand-error">
+            <AlertIcon /> {errors.brand}
           </p>
         )}
       </div>

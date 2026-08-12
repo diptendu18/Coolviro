@@ -34,6 +34,7 @@ function buildEmailContent(booking) {
     ['Mobile Number', booking.mobile],
     ['Selected Service', booking.service],
     ['Appliance Type', booking.applianceType],
+    ...(booking.brand ? [['Brand', booking.brand]] : []),
     ['Pincode', booking.pincode],
     ['Address', booking.address],
   ];

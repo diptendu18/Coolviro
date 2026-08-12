@@ -52,6 +52,17 @@ export function validateApplianceType(value, allowedTypes) {
   return '';
 }
 
+// Brand is optional — not every booking (or every appliance category) has
+// a specific brand chosen. When a value is present it must be one of the
+// brands offered for the selected service.
+export function validateBrand(value, allowedBrands) {
+  if (!value) return '';
+  if (!allowedBrands || !allowedBrands.includes(value)) {
+    return 'Please select a valid brand.';
+  }
+  return '';
+}
+
 export function validatePincode(value) {
   const v = (value || '').trim();
   if (!v) return 'Please enter your pincode.';
@@ -67,7 +78,10 @@ export function validateAddress(value) {
   return '';
 }
 
-export function validateBookingForm(values, { serviceOptions, applianceTypesByServiceName }) {
+export function validateBookingForm(
+  values,
+  { serviceOptions, applianceTypesByServiceName, brandsByServiceName = {} }
+) {
   const errors = {};
 
   const nameError = validateName(values.name);
@@ -82,6 +96,10 @@ export function validateBookingForm(values, { serviceOptions, applianceTypesBySe
   const allowedTypes = applianceTypesByServiceName[values.service] || [];
   const applianceError = validateApplianceType(values.applianceType, allowedTypes);
   if (applianceError) errors.applianceType = applianceError;
+
+  const allowedBrands = brandsByServiceName[values.service] || [];
+  const brandError = validateBrand(values.brand, allowedBrands);
+  if (brandError) errors.brand = brandError;
 
   const pincodeError = validatePincode(values.pincode);
   if (pincodeError) errors.pincode = pincodeError;

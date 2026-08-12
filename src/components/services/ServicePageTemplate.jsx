@@ -9,6 +9,7 @@ import FAQAccordion from '@/components/ui/FAQAccordion';
 import { CallButton, WhatsappButton, BookButton } from '@/components/ui/CTAButtons';
 import { CheckIcon, ShieldCheckIcon } from '@/components/ui/Icons';
 import { services, brandDisclaimer } from '@/data/services';
+import { slugifyBrand } from '@/data/brandPages';
 import { serviceAreas } from '@/data/site';
 
 export default function ServicePageTemplate({ service }) {
@@ -91,7 +92,11 @@ export default function ServicePageTemplate({ service }) {
                 <h3>Supported Brands</h3>
                 <ul className="chip-list chip-list--brands">
                   {service.brands.map((brand) => (
-                    <li key={brand}>{brand}</li>
+                    <li key={brand}>
+                      <Link href={`/services/${service.urlSegment}/${slugifyBrand(brand)}`}>
+                        {brand}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
                 <p className="brand-disclaimer">{brandDisclaimer}</p>
@@ -104,11 +109,15 @@ export default function ServicePageTemplate({ service }) {
               <h3>Supported Brands</h3>
               <div className="brand-logo-grid">
                 {service.brandLogos.map((brand) => (
-                  <div className="brand-logo-card" key={brand.name}>
+                  <Link
+                    href={`/services/${service.urlSegment}/${slugifyBrand(brand.name)}`}
+                    className="brand-logo-card"
+                    key={brand.name}
+                  >
                     <div className="brand-logo-card-img">
                       <Image
                         src={brand.image}
-                        alt={`${brand.name} split AC unit — Coolviro Services repairs ${brand.name} air conditioners in Kolkata`}
+                        alt={`${brand.name} ${service.shortName} — Coolviro Services repairs ${brand.name} ${service.applianceNounPlural} in Kolkata`}
                         width={700}
                         height={400}
                         loading="lazy"
@@ -116,7 +125,7 @@ export default function ServicePageTemplate({ service }) {
                       />
                     </div>
                     <span className="brand-logo-card-name">{brand.name}</span>
-                  </div>
+                  </Link>
                 ))}
               </div>
               <p className="brand-disclaimer">{brandDisclaimer}</p>
@@ -267,8 +276,24 @@ export default function ServicePageTemplate({ service }) {
           color: var(--color-primary);
         }
         .chip-list--brands li {
+          background: transparent;
+          padding: 0;
+        }
+        .chip-list--brands li :global(a) {
+          display: inline-flex;
+          align-items: center;
           background: #f8fafc;
           border: 1px solid var(--color-border);
+          color: var(--color-text);
+          padding: var(--space-2) var(--space-4);
+          border-radius: var(--radius-full);
+          font-weight: 600;
+          font-size: 0.9rem;
+          transition: border-color 0.2s ease, color 0.2s ease;
+        }
+        .chip-list--brands li :global(a:hover) {
+          border-color: var(--color-secondary);
+          color: var(--color-primary);
         }
         .brand-disclaimer {
           margin: var(--space-4) 0 0;

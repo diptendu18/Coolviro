@@ -1,5 +1,5 @@
 import { validateBookingForm } from '@/utils/validation';
-import { serviceNameOptions, applianceTypesByServiceName } from '@/data/services';
+import { serviceNameOptions, applianceTypesByServiceName, brandsByServiceName } from '@/data/services';
 import { isEmailConfigured, sendBookingEmail } from '@/utils/email';
 
 // Best-effort in-memory rate limiting. This resets whenever the serverless
@@ -62,6 +62,7 @@ export default async function handler(req, res) {
     mobile: sanitizeString(body.mobile),
     service: sanitizeString(body.service),
     applianceType: sanitizeString(body.applianceType),
+    brand: sanitizeString(body.brand),
     pincode: sanitizeString(body.pincode),
     address: sanitizeString(body.address),
   };
@@ -69,6 +70,7 @@ export default async function handler(req, res) {
   const errors = validateBookingForm(values, {
     serviceOptions: serviceNameOptions,
     applianceTypesByServiceName,
+    brandsByServiceName,
   });
 
   if (Object.keys(errors).length > 0) {
