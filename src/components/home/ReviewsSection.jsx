@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SparklesIcon } from '@/components/ui/Icons';
-import { BookButton } from '@/components/ui/CTAButtons';
 import { site } from '@/data/site';
 
 function Stars({ rating }) {
@@ -94,17 +93,15 @@ export default function ReviewsSection() {
             <span className="reviews-icon">
               <SparklesIcon />
             </span>
-            <h3>We&apos;re Just Getting Started</h3>
+            <h3>Your Feedback Matters to Us</h3>
             <p>
-              We&apos;re collecting genuine feedback from our customers. Real
-              reviews will appear here as they come in — we don&apos;t publish
-              invented testimonials or ratings.
+              We value your experience with Coolviro Services. Share your
+              genuine feedback and help us serve you better.
             </p>
             <div className="reviews-placeholder-ctas">
               <Link href="/write-a-review" className="btn btn-secondary">
                 Write a Review
               </Link>
-              <BookButton label="Book Your First Service" />
             </div>
           </div>
         )}

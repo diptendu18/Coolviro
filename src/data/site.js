@@ -36,7 +36,7 @@ export const site = {
   // Base URL of the PHP review backend (hosted on Hostinger, not this
   // Next.js app) — e.g. "https://coolviroservices.com/reviews-backend".
   // No trailing slash. Left unset, the review system is simply hidden:
-  // the homepage falls back to its "We're Just Getting Started" message
+  // the homepage falls back to its "Your Feedback Matters to Us" message
   // and the review submission page explains reviews aren't open yet.
   // See reviews-backend/README.md for full setup instructions.
   reviewsApiUrl: (process.env.NEXT_PUBLIC_REVIEWS_API_URL || '').replace(/\/$/, ''),
