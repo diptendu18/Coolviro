@@ -11,7 +11,9 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container site-footer-grid">
         <div className="site-footer-brand">
-          <Logo size={36} />
+          <Link href="/" aria-label="Coolviro Services — Home" className="site-footer-logo-badge">
+            <Logo size={32} />
+          </Link>
           <p>
             Coolviro Services provides professional home appliance repair and
             service at your doorstep across Kolkata — AC, refrigerator,
@@ -87,6 +89,12 @@ export default function Footer() {
           display: grid;
           grid-template-columns: 1.6fr repeat(3, 1fr);
           gap: var(--space-7);
+        }
+        .site-footer-logo-badge {
+          display: inline-flex;
+          background: #fff;
+          border-radius: var(--radius-md);
+          padding: var(--space-3) var(--space-4);
         }
         .site-footer-brand p {
           color: #94a3b8;

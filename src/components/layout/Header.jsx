@@ -20,7 +20,7 @@ export default function Header() {
       <header className="site-header">
         <div className="container site-header-inner">
           <Link href="/" className="site-header-logo" aria-label="Coolviro Services — Home">
-            <Logo size={38} />
+            <Logo size={38} priority />
           </Link>
 
           <nav className="site-header-nav" aria-label="Primary">

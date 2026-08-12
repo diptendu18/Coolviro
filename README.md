@@ -140,16 +140,15 @@ Service areas are centralized in `src/data/site.js` (`serviceAreas` array) and u
 
 ## 11. Image Replacement
 
-No product/appliance photography or technician photos were supplied, so:
+- **Logo** (`src/components/ui/Logo.jsx`) uses the official Coolviro Services logo at `public/images/brand/coolviro-logo.png` — cropped (logo mark only, no technician photo) and background-removed from the original artwork the client supplied. The untouched original artwork is kept for reference/provenance at `design-assets/coolviro-brand-artwork-source.png` — deliberately **outside** `public/`, since anything under `public/` is directly servable by URL regardless of whether a page links to it, and that source artwork includes a technician's photo the site itself never displays. Rendered via `next/image`, so the logo is automatically served as an optimized, appropriately-sized WebP/AVIF in production. On the dark footer, it's shown inside a small white badge (`.site-footer-logo-badge` in `Footer.jsx`) so the logo's dark navy text stays legible — remove that wrapper if a future logo version already has enough contrast on dark backgrounds.
+- No product/appliance photography or technician photos were supplied for the services themselves, so **service illustrations** (`src/components/ui/ApplianceArt.jsx`) are clean, on-brand vector graphics, not photos.
+- The **favicon/app icons** (`favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`) and the Open Graph share image (`public/images/og-default.jpg`) still use the original placeholder mark — the supplied artwork doesn't crop cleanly into a small square icon without cutting into the wordmark or the photo, so regenerate these from a proper square icon version of the logo if/when one is available.
 
-- **Service illustrations** (`src/components/ui/ApplianceArt.jsx`) are clean, on-brand vector graphics, not photos.
-- **Logo** (`src/components/ui/Logo.jsx`) is a placeholder SVG wordmark using the brand colors — no official logo file existed in the project.
+To replace service photography or update the logo further:
 
-To replace with real photography or the official logo:
-
-1. Add optimized `.webp`/`.avif` files to `/public/images/services/` (e.g. `ac-service.webp`) or `/public/images/brand/` (e.g. `logo.svg`).
-2. Swap the relevant `<ApplianceArt type="..." />` or `<Logo />` usage for a Next.js `<Image>` component pointing at the new file, keeping `width`/`height` (or `fill` + a sized wrapper) to avoid layout shift.
-3. Regenerate `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, and `public/images/og-default.jpg` from the official logo once it's available (any image editor or a quick script works — see `scripts/` for how the placeholder versions were generated).
+1. Add optimized `.webp`/`.avif` files to `/public/images/services/` (e.g. `ac-service.webp`) or `/public/images/brand/`.
+2. Swap the relevant `<ApplianceArt type="..." />` usage for a Next.js `<Image>` component, or update `LOGO_SRC`/`LOGO_WIDTH`/`LOGO_HEIGHT` in `src/components/ui/Logo.jsx` to point at the new file (keep `width`/`height` accurate — they come from the source image's real pixel dimensions and drive the aspect ratio).
+3. Regenerate `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, and `public/images/og-default.jpg` from the logo (any image editor or a quick script works — see `scripts/` for how the current placeholder-based versions were generated).
 
 ## 12. Google Analytics (GA4) Setup
 

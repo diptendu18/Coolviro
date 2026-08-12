@@ -1,82 +1,49 @@
+import Image from 'next/image';
+
+// Official Coolviro Services logo, cropped from the brand artwork supplied
+// by the client (public/images/brand/coolviro-brand-artwork-source.png) —
+// see that file for the untouched original. This crop keeps only the
+// logo mark itself (crescent, wave, snowflake, "Coolviro Services"
+// wordmark); the technician photo and marketing copy from the source
+// artwork are intentionally excluded from anything rendered on the site.
+const LOGO_SRC = '/images/brand/coolviro-logo.png';
+const LOGO_WIDTH = 850;
+const LOGO_HEIGHT = 340;
+
 /**
- * Placeholder brand mark for Coolviro Services.
- *
- * No official logo file was found in the project assets, so this is a
- * clean SVG wordmark built from the brand colors, used consistently across
- * the header, mobile menu, and footer. Replace the <IconMark>/wordmark
- * markup below with an <img src="/images/brand/logo.svg" /> pointing at
- * the official logo once it is added to /public/images/brand/.
+ * `size` sets the logo's rendered height in px at desktop width; it scales
+ * down automatically on narrower screens while width is always derived
+ * from the image's real aspect ratio, so it can never stretch or distort.
  */
-function IconMark({ size = 40 }) {
+export default function Logo({ size = 40, className = '', priority = false }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
-      role="img"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <defs>
-        <linearGradient id="coolviro-icon-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#0066FF" />
-          <stop offset="1" stopColor="#00C2FF" />
-        </linearGradient>
-      </defs>
-      <rect width="64" height="64" rx="16" fill="url(#coolviro-icon-g)" />
-      <text
-        x="32"
-        y="42"
-        textAnchor="middle"
-        fontFamily="Arial, Helvetica, sans-serif"
-        fontWeight="800"
-        fontSize="30"
-        fill="#ffffff"
-      >
-        C
-      </text>
-      <path
-        d="M47 15 L47 21 M44 18 L50 18 M45.3 16.3 L48.7 19.7 M48.7 16.3 L45.3 19.7"
-        stroke="#ffffff"
-        strokeWidth="1.4"
-        strokeLinecap="round"
+    <span className={className} style={{ '--logo-h': `${size}px` }}>
+      <Image
+        src={LOGO_SRC}
+        alt="Coolviro Services - Home Appliance Repair & Service"
+        width={LOGO_WIDTH}
+        height={LOGO_HEIGHT}
+        priority={priority}
+        className="brand-logo-img"
       />
-    </svg>
-  );
-}
-
-export default function Logo({ variant = 'full', size = 40, className = '' }) {
-  if (variant === 'icon') {
-    return (
-      <span className={className}>
-        <IconMark size={size} />
-      </span>
-    );
-  }
-
-  return (
-    <span
-      className={className}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem' }}
-    >
-      <IconMark size={size} />
-      <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-        <span style={{ fontWeight: 800, fontSize: `${size * 0.5}px`, letterSpacing: '-0.01em' }}>
-          <span style={{ color: '#0a2472' }}>Cool</span>
-          <span style={{ color: 'var(--color-primary, #0066FF)' }}>viro</span>
-        </span>
-        <span
-          style={{
-            fontWeight: 700,
-            fontSize: `${size * 0.19}px`,
-            letterSpacing: '0.22em',
-            color: 'var(--color-text-muted, #475569)',
-            marginTop: '2px',
-          }}
-        >
-          SERVICES
-        </span>
-      </span>
+      <style jsx>{`
+        span {
+          display: inline-flex;
+          align-items: center;
+        }
+        span :global(.brand-logo-img) {
+          height: var(--logo-h);
+          width: auto;
+          max-width: 100%;
+          object-fit: contain;
+          display: block;
+        }
+        @media (max-width: 640px) {
+          span {
+            --logo-h: calc(${size}px * 0.8);
+          }
+        }
+      `}</style>
     </span>
   );
 }
