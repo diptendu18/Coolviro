@@ -17,13 +17,13 @@ export default function HomePage() {
         path="/"
       />
       <Hero />
-      <TrustSection />
       <ServicesGrid />
       <HowItWorks />
       <ServiceAreasPreview />
       <ReviewsSection />
       <BookingSection />
       <FinalCTA />
+      <TrustSection />
     </>
   );
 }
