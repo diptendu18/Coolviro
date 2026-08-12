@@ -52,11 +52,8 @@ export function validateApplianceType(value, allowedTypes) {
   return '';
 }
 
-// Brand is optional — not every booking (or every appliance category) has
-// a specific brand chosen. When a value is present it must be one of the
-// brands offered for the selected service.
 export function validateBrand(value, allowedBrands) {
-  if (!value) return '';
+  if (!value) return 'Please select the brand.';
   if (!allowedBrands || !allowedBrands.includes(value)) {
     return 'Please select a valid brand.';
   }

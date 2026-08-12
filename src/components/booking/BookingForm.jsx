@@ -300,7 +300,7 @@ export default function BookingForm() {
       </div>
 
       <div className="form-field">
-        <label htmlFor="brand">Brand (Optional)</label>
+        <label htmlFor="brand">Select Brand</label>
         <select
           id="brand"
           name="brand"
@@ -310,9 +310,10 @@ export default function BookingForm() {
           aria-invalid={touched.brand && !!errors.brand}
           aria-describedby={errors.brand ? 'brand-error' : undefined}
           disabled={!values.service}
+          required
         >
           <option value="">
-            {values.service ? 'Select brand (optional)' : 'Select a service first'}
+            {values.service ? 'Select a brand' : 'Select a service first'}
           </option>
           {brandOptions.map((brand) => (
             <option key={brand} value={brand}>
