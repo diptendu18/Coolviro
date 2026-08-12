@@ -1,0 +1,23 @@
+# Defense in depth: even though api/submit_review.php only ever writes
+# .jpg/.png/.webp files with a random name, this folder must never execute
+# PHP — this is what stops an "upload a .php file disguised as an image"
+# attack from doing anything even if some other validation step failed.
+
+<IfModule mod_php7.c>
+  php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+  php_flag engine off
+</IfModule>
+
+<FilesMatch "\.(php|phtml|php\d|phar|cgi|pl)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+Options -Indexes -ExecCGI

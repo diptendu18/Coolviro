@@ -63,8 +63,9 @@ cp .env.example .env.local
 | `SITE_URL` | Production domain, used for canonical URLs, Open Graph, sitemap.xml, robots.txt |
 | `NEXT_PUBLIC_GA4_MEASUREMENT_ID` | Google Analytics 4 Measurement ID (script only loads if this is set) |
 | `NEXT_PUBLIC_GSC_VERIFICATION` | Google Search Console HTML tag verification code |
+| `NEXT_PUBLIC_REVIEWS_API_URL` | Base URL of the PHP review backend on Hostinger — see section 17 and `reviews-backend/README.md` |
 
-No secret is ever imported into client-side/browser code — SMTP credentials are only read inside `pages/api/booking.js`, which runs on the server.
+No secret is ever imported into client-side/browser code — SMTP credentials are only read inside `pages/api/booking.js`, which runs on the server, and the review system's real MySQL credentials live only in `reviews-backend/config.php` on Hostinger, never in this Next.js project.
 
 ## 7. Booking Email Setup
 
@@ -190,7 +191,29 @@ This is a standard Next.js app (Pages Router) with one serverless API route (`/a
 - **Vercel** (recommended — zero-config for Next.js): connect the repo, set the environment variables from `.env.example` in the project settings, deploy.
 - **Netlify**, **Render**, or any Node host: build with `npm run build`, run with `npm start`, and set the same environment variables.
 
-No database, admin panel, or payment gateway is required — the only server-side piece is the booking email API route.
+No database or payment gateway is required for the Next.js app itself — its only server-side piece is the booking email API route. The customer review system (below) is a separate PHP + MySQL application, hosted independently on Hostinger, not part of this Next.js deployment.
+
+## 17. Customer Review System (Hostinger PHP + MySQL)
+
+Genuine customer reviews are stored permanently in MySQL and moderated
+before they ever appear on the site — see `reviews-backend/README.md` for
+full setup. Summary:
+
+- `reviews-backend/` is a standalone PHP application (not Vercel/Next.js
+  code) meant to be uploaded to Hostinger, where it connects to a
+  Hostinger MySQL database.
+- New reviews submitted via `/write-a-review` are stored with
+  `status = 'pending'` and are never shown publicly until approved.
+- `reviews-backend/admin/` is a password-protected panel (separate from
+  this website) where pending reviews can be approved, rejected, or
+  deleted. Only approved reviews are ever returned by the public API.
+- Set `NEXT_PUBLIC_REVIEWS_API_URL` (see `.env.example`) to the deployed
+  backend's URL to connect the frontend. Left unset, the review sections
+  of the site simply show a "not available yet" state instead of
+  erroring.
+- No fabricated reviews or ratings are included anywhere — the "What Our
+  Customers Say" section shows real approved reviews if any exist, or an
+  honest "We're Just Getting Started" message if not.
 
 ---
 
@@ -220,6 +243,7 @@ src/
   styles/globals.css     Design system + base styles
 scripts/generate-seo-files.mjs   Builds sitemap.xml/robots.txt from SITE_URL
 public/                  Static assets, icons, manifest
+reviews-backend/         Standalone PHP + MySQL review system (deployed separately, on Hostinger — see reviews-backend/README.md)
 ```
 
 ## Local Testing Checklist
@@ -234,10 +258,13 @@ Before deploying, verify locally (`npm run dev`):
 - [ ] Responsive at mobile / tablet / desktop widths — no horizontal scroll, no clipped text, no overlapping elements
 - [ ] 404 page appears for unknown URLs, with working "Go Home" / "View Services" / "Book a Service" buttons
 - [ ] `npm run build && npm run lint` complete with no errors
+- [ ] If `NEXT_PUBLIC_REVIEWS_API_URL` is set: `/write-a-review` submits successfully, new reviews appear as "Pending" in `/reviews-backend/admin/`, and only reviews you Approve appear in "What Our Customers Say" on the homepage
 
 ## What This Site Intentionally Does Not Include
 
-Per project requirements: no admin panel, no customer/technician login, no shopping cart or online payment, no fabricated reviews/ratings/certifications/awards/brand partnerships, no business address, no Google Maps embed, and no invented business facts. Anywhere real information was missing, this is documented above (or marked `[NEEDS USER INPUT]` in `.env.example`) rather than invented.
+Per project requirements: no customer/technician login, no shopping cart or online payment, no fabricated reviews/ratings/certifications/awards/brand partnerships, no business address, no Google Maps embed, and no invented business facts. Anywhere real information was missing, this is documented above (or marked `[NEEDS USER INPUT]` in `.env.example`) rather than invented.
+
+The one exception to "no admin panel" is the review-moderation panel described in section 17 — a deliberate, explicitly-requested addition so genuine customer reviews can be approved before publishing. It lives entirely in `reviews-backend/admin/`, is password-protected, and is unrelated to bookings, customers, or payments.
 
 ## Security Notes
 

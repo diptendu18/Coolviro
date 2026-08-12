@@ -1,0 +1,8 @@
+# Real database credentials — never commit this. Copy config.sample.php
+# to config.php on the server (or locally) and fill in real values there.
+config.php
+
+# Customer-uploaded review photos — real user uploads don't belong in git.
+uploads/reviews/*
+!uploads/reviews/.gitkeep
+!uploads/reviews/.htaccess

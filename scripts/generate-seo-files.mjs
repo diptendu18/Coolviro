@@ -36,6 +36,7 @@ const staticRoutes = [
   '/areas',
   '/about',
   '/contact',
+  '/write-a-review',
   '/privacy-policy',
   '/terms-conditions',
   '/service-policy',
