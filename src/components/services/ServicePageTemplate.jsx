@@ -7,7 +7,7 @@ import ApplianceArt from '@/components/ui/ApplianceArt';
 import ServiceCard from '@/components/ui/ServiceCard';
 import FAQAccordion from '@/components/ui/FAQAccordion';
 import { CallButton, WhatsappButton, BookButton } from '@/components/ui/CTAButtons';
-import { CheckIcon, ShieldCheckIcon } from '@/components/ui/Icons';
+import { CheckIcon, ShieldCheckIcon, ChevronRightIcon } from '@/components/ui/Icons';
 import { services, brandDisclaimer } from '@/data/services';
 import { slugifyBrand } from '@/data/brandPages';
 import { serviceAreas } from '@/data/site';
@@ -125,6 +125,9 @@ export default function ServicePageTemplate({ service }) {
                       />
                     </div>
                     <span className="brand-logo-card-name">{brand.name}</span>
+                    <span className="brand-logo-card-cta">
+                      View Services <ChevronRightIcon width="14" height="14" />
+                    </span>
                   </Link>
                 ))}
               </div>
@@ -343,7 +346,26 @@ export default function ServicePageTemplate({ service }) {
           color: var(--color-text);
           text-align: center;
         }
-        @media (max-width: 960px) {
+        .brand-logo-card-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 2px;
+          font-weight: 700;
+          font-size: 0.78rem;
+          color: var(--color-primary);
+        }
+        .brand-logo-card-cta :global(svg) {
+          transition: transform 0.2s ease;
+        }
+        .brand-logo-card:hover .brand-logo-card-cta :global(svg) {
+          transform: translateX(2px);
+        }
+        @media (max-width: 1100px) {
+          .brand-logo-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+        @media (max-width: 860px) {
           .brand-logo-grid {
             grid-template-columns: repeat(3, 1fr);
           }

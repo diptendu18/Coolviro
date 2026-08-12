@@ -288,6 +288,18 @@ export const services = [
       'Morphy Richards',
       'Bosch',
     ],
+    brandLogos: [
+      { name: 'LG', image: '/images/brand/lg-microwave.webp' },
+      { name: 'Samsung', image: '/images/brand/samsung-microwave.webp' },
+      { name: 'IFB', image: '/images/brand/ifb-microwave.webp' },
+      { name: 'Panasonic', image: '/images/brand/panasonic-microwave.webp' },
+      { name: 'Godrej', image: '/images/brand/godrej-microwave.webp' },
+      { name: 'Whirlpool', image: '/images/brand/whirlpool-microwave.webp' },
+      { name: 'Haier', image: '/images/brand/haier-microwave.webp' },
+      { name: 'Bajaj', image: '/images/brand/bajaj-microwave.webp' },
+      { name: 'Morphy Richards', image: '/images/brand/morphy-richards-microwave.webp' },
+      { name: 'Bosch', image: '/images/brand/bosch-microwave.webp' },
+    ],
     faqs: [
       {
         q: 'Which types of microwave ovens do you service?',
@@ -353,6 +365,18 @@ export const services = [
       'Godrej',
       'Voltas Beko',
       'Lloyd',
+    ],
+    brandLogos: [
+      { name: 'LG', image: '/images/brand/lg-washing-machine.webp' },
+      { name: 'Samsung', image: '/images/brand/samsung-washing-machine.webp' },
+      { name: 'Whirlpool', image: '/images/brand/whirlpool-washing-machine.webp' },
+      { name: 'IFB', image: '/images/brand/ifb-washing-machine.webp' },
+      { name: 'Bosch', image: '/images/brand/bosch-washing-machine.webp' },
+      { name: 'Haier', image: '/images/brand/haier-washing-machine.webp' },
+      { name: 'Panasonic', image: '/images/brand/panasonic-washing-machine.webp' },
+      { name: 'Godrej', image: '/images/brand/godrej-washing-machine.webp' },
+      { name: 'Voltas Beko', image: '/images/brand/voltas-beko-washing-machine.webp' },
+      { name: 'Lloyd', image: '/images/brand/lloyd-washing-machine.webp' },
     ],
     faqs: [
       {
