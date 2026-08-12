@@ -63,6 +63,7 @@ export default async function handler(req, res) {
     service: sanitizeString(body.service),
     applianceType: sanitizeString(body.applianceType),
     brand: sanitizeString(body.brand),
+    brandOther: sanitizeString(body.brandOther),
     pincode: sanitizeString(body.pincode),
     address: sanitizeString(body.address),
   };

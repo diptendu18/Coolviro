@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { OTHER_BRAND_VALUE } from './validation';
 
 const PLACEHOLDER_PATTERN = /needs user input/i;
 
@@ -35,6 +36,9 @@ function buildEmailContent(booking) {
     ['Selected Service', booking.service],
     ['Appliance Type', booking.applianceType],
     ['Brand', booking.brand],
+    ...(booking.brand === OTHER_BRAND_VALUE && booking.brandOther
+      ? [['Brand Name', booking.brandOther]]
+      : []),
     ['Pincode', booking.pincode],
     ['Address', booking.address],
   ];

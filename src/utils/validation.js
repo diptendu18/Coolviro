@@ -5,6 +5,10 @@
 const INDIAN_MOBILE_REGEX = /^[6-9]\d{9}$/;
 const INDIAN_PINCODE_REGEX = /^[1-9]\d{5}$/;
 
+// Sentinel value for the "Other" option in the Select Brand dropdown —
+// picking it reveals a free-text "Enter Brand Name" field.
+export const OTHER_BRAND_VALUE = 'Other';
+
 export function normalizeMobile(value) {
   const digits = (value || '').replace(/[\s-]/g, '');
   // Only strip a country code when its presence is unambiguous (either a
@@ -54,9 +58,21 @@ export function validateApplianceType(value, allowedTypes) {
 
 export function validateBrand(value, allowedBrands) {
   if (!value) return 'Please select the brand.';
+  if (value === OTHER_BRAND_VALUE) return '';
   if (!allowedBrands || !allowedBrands.includes(value)) {
     return 'Please select a valid brand.';
   }
+  return '';
+}
+
+// Only required when the customer picked "Other" in the Select Brand
+// dropdown — otherwise this field isn't shown at all.
+export function validateBrandOther(brandValue, brandOtherValue) {
+  if (brandValue !== OTHER_BRAND_VALUE) return '';
+  const v = (brandOtherValue || '').trim();
+  if (!v) return 'Please enter the brand name.';
+  if (v.length < 2) return 'Please enter a valid brand name.';
+  if (v.length > 60) return 'Brand name is too long.';
   return '';
 }
 
@@ -97,6 +113,9 @@ export function validateBookingForm(
   const allowedBrands = brandsByServiceName[values.service] || [];
   const brandError = validateBrand(values.brand, allowedBrands);
   if (brandError) errors.brand = brandError;
+
+  const brandOtherError = validateBrandOther(values.brand, values.brandOther);
+  if (brandOtherError) errors.brandOther = brandOtherError;
 
   const pincodeError = validatePincode(values.pincode);
   if (pincodeError) errors.pincode = pincodeError;

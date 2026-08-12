@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { serviceNameOptions, applianceTypesByServiceName, brandsByServiceName } from '@/data/services';
-import { validateBookingForm } from '@/utils/validation';
+import { validateBookingForm, OTHER_BRAND_VALUE } from '@/utils/validation';
 import { AlertIcon, CheckIcon } from '@/components/ui/Icons';
 
 const EMPTY_FORM = {
@@ -10,6 +10,7 @@ const EMPTY_FORM = {
   service: '',
   applianceType: '',
   brand: '',
+  brandOther: '',
   pincode: '',
   address: '',
   company: '', // honeypot — must stay empty
@@ -48,6 +49,10 @@ export default function BookingForm() {
     if (field === 'service') {
       nextValues.applianceType = '';
       nextValues.brand = '';
+      nextValues.brandOther = '';
+    }
+    if (field === 'brand' && value !== OTHER_BRAND_VALUE) {
+      nextValues.brandOther = '';
     }
     setValues(nextValues);
 
@@ -55,7 +60,10 @@ export default function BookingForm() {
     // the field becomes valid, even if the field never receives a blur
     // event (e.g. choosing a <select> option with a mouse).
     setErrors((e) => {
-      if (!(field in e) && !(field === 'service' && ('applianceType' in e || 'brand' in e))) return e;
+      const touchesDependents =
+        (field === 'service' && ('applianceType' in e || 'brand' in e || 'brandOther' in e)) ||
+        (field === 'brand' && 'brandOther' in e);
+      if (!(field in e) && !touchesDependents) return e;
       const fieldErrors = validateBookingForm(nextValues, {
         serviceOptions: serviceNameOptions,
         applianceTypesByServiceName,
@@ -65,6 +73,10 @@ export default function BookingForm() {
       if (field === 'service') {
         nextErrors.applianceType = fieldErrors.applianceType;
         nextErrors.brand = fieldErrors.brand;
+        nextErrors.brandOther = fieldErrors.brandOther;
+      }
+      if (field === 'brand') {
+        nextErrors.brandOther = fieldErrors.brandOther;
       }
       return nextErrors;
     });
@@ -102,6 +114,7 @@ export default function BookingForm() {
       service: true,
       applianceType: true,
       brand: true,
+      brandOther: true,
       pincode: true,
       address: true,
     });
@@ -320,6 +333,7 @@ export default function BookingForm() {
               {brand}
             </option>
           ))}
+          {values.service && <option value={OTHER_BRAND_VALUE}>Other</option>}
         </select>
         {touched.brand && errors.brand && (
           <p className="field-error" id="brand-error">
@@ -327,6 +341,30 @@ export default function BookingForm() {
           </p>
         )}
       </div>
+
+      {values.brand === OTHER_BRAND_VALUE && (
+        <div className="form-field">
+          <label htmlFor="brandOther">Enter Brand Name</label>
+          <input
+            id="brandOther"
+            name="brandOther"
+            type="text"
+            autoComplete="off"
+            placeholder="Type the brand name"
+            value={values.brandOther}
+            onChange={(e) => handleChange('brandOther', e.target.value)}
+            onBlur={() => handleBlur('brandOther')}
+            aria-invalid={touched.brandOther && !!errors.brandOther}
+            aria-describedby={errors.brandOther ? 'brandOther-error' : undefined}
+            required
+          />
+          {touched.brandOther && errors.brandOther && (
+            <p className="field-error" id="brandOther-error">
+              <AlertIcon /> {errors.brandOther}
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="form-field">
         <label htmlFor="pincode">Pincode</label>
