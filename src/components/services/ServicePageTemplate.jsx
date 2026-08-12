@@ -65,75 +65,45 @@ export default function ServicePageTemplate({ service }) {
           </div>
           <p className="service-overview-text">{service.overview}</p>
 
-          {service.brandLogos ? (
-            <div className="card service-info-card service-info-grid">
-              <h3>Appliance Types We Service</h3>
-              <ul className="chip-list">
-                {service.types.map((type) => (
-                  <li key={type}>
-                    <CheckIcon /> {type}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <div className="grid grid-2 service-info-grid">
-              <div className="card service-info-card">
-                <h3>Appliance Types We Service</h3>
-                <ul className="chip-list">
-                  {service.types.map((type) => (
-                    <li key={type}>
-                      <CheckIcon /> {type}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="card service-info-card">
-                <h3>Supported Brands</h3>
-                <ul className="chip-list chip-list--brands">
-                  {service.brands.map((brand) => (
-                    <li key={brand}>
-                      <Link href={`/services/${service.urlSegment}/${slugifyBrand(brand)}`}>
-                        {brand}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <p className="brand-disclaimer">{brandDisclaimer}</p>
-              </div>
-            </div>
-          )}
+          <div className="card service-info-card service-info-grid">
+            <h3>Appliance Types We Service</h3>
+            <ul className="chip-list">
+              {service.types.map((type) => (
+                <li key={type}>
+                  <CheckIcon /> {type}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {service.brandLogos && (
-            <div className="card service-info-card brand-logo-section">
-              <h3>Supported Brands</h3>
-              <div className="brand-logo-grid">
-                {service.brandLogos.map((brand) => (
-                  <Link
-                    href={`/services/${service.urlSegment}/${slugifyBrand(brand.name)}`}
-                    className="brand-logo-card"
-                    key={brand.name}
-                  >
-                    <div className="brand-logo-card-img">
-                      <Image
-                        src={brand.image}
-                        alt={`${brand.name} ${service.shortName} — Coolviro Services repairs ${brand.name} ${service.applianceNounPlural} in Kolkata`}
-                        width={700}
-                        height={400}
-                        loading="lazy"
-                        sizes="(max-width: 640px) 45vw, (max-width: 960px) 200px, 180px"
-                      />
-                    </div>
-                    <span className="brand-logo-card-name">{brand.name}</span>
-                    <span className="brand-logo-card-cta">
-                      View Services <ChevronRightIcon width="14" height="14" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-              <p className="brand-disclaimer">{brandDisclaimer}</p>
+          <div className="card service-info-card brand-logo-section">
+            <h3>Supported Brands</h3>
+            <div className="brand-logo-grid">
+              {service.brandLogos.map((brand) => (
+                <Link
+                  href={`/services/${service.urlSegment}/${slugifyBrand(brand.name)}`}
+                  className="brand-logo-card"
+                  key={brand.name}
+                >
+                  <div className="brand-logo-card-img">
+                    <Image
+                      src={brand.image}
+                      alt={`${brand.name} ${service.shortName} — Coolviro Services repairs ${brand.name} ${service.applianceNounPlural} in Kolkata`}
+                      width={700}
+                      height={400}
+                      loading="lazy"
+                      sizes="(max-width: 640px) 45vw, (max-width: 960px) 200px, 180px"
+                    />
+                  </div>
+                  <span className="brand-logo-card-name">{brand.name}</span>
+                  <span className="brand-logo-card-cta">
+                    View Services <ChevronRightIcon width="14" height="14" />
+                  </span>
+                </Link>
+              ))}
             </div>
-          )}
+            <p className="brand-disclaimer">{brandDisclaimer}</p>
+          </div>
 
           <div className="card service-info-card service-areas-note">
             <h3>Service Area</h3>
@@ -276,26 +246,6 @@ export default function ServicePageTemplate({ service }) {
           font-size: 0.9rem;
         }
         .chip-list :global(svg) {
-          color: var(--color-primary);
-        }
-        .chip-list--brands li {
-          background: transparent;
-          padding: 0;
-        }
-        .chip-list--brands li :global(a) {
-          display: inline-flex;
-          align-items: center;
-          background: #f8fafc;
-          border: 1px solid var(--color-border);
-          color: var(--color-text);
-          padding: var(--space-2) var(--space-4);
-          border-radius: var(--radius-full);
-          font-weight: 600;
-          font-size: 0.9rem;
-          transition: border-color 0.2s ease, color 0.2s ease;
-        }
-        .chip-list--brands li :global(a:hover) {
-          border-color: var(--color-secondary);
           color: var(--color-primary);
         }
         .brand-disclaimer {

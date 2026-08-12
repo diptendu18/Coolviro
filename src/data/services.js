@@ -422,9 +422,8 @@ export const brandsByServiceName = services.reduce((acc, s) => {
 
 export const serviceNameOptions = services.map((s) => s.name);
 
+// Single source of truth for the brand-authorization disclaimer. Used
+// once per page (main service pages and brand-specific pages alike) —
+// do not duplicate this text elsewhere; import and reuse this constant.
 export const brandDisclaimer =
-  'We service appliances from a wide range of leading brands. Coolviro Services is an independent appliance repair service and is not an authorized service center or official partner of any brand named above.';
-
-// Required verbatim on every brand-specific service page.
-export const brandPageDisclaimer =
-  'Coolviro Services is an independent home appliance repair and service provider. We are not an authorized service center or official partner of the brand mentioned above.';
+  'Coolviro Services is an independent appliance repair provider and is not an authorized service center or official partner of the brands mentioned on this page.';

@@ -13,7 +13,7 @@ import {
   BadgeCheckIcon,
   DoorstepIcon,
 } from '@/components/ui/Icons';
-import { brandPageDisclaimer } from '@/data/services';
+import { brandDisclaimer } from '@/data/services';
 import { serviceAreas } from '@/data/site';
 
 const TRUST_ITEMS = [
@@ -36,7 +36,7 @@ function buildFaqs(brand, service) {
     },
     {
       q: `Is Coolviro Services an authorized ${brand} service center?`,
-      a: `No. Coolviro Services is an independent home appliance repair and service provider and is not an authorized service center or official partner of ${brand}.`,
+      a: `No — Coolviro Services is an independent provider and is not an authorized service center or official partner of ${brand}.`,
     },
     {
       q: `Do you provide a warranty on ${brand} ${shortLower} repair?`,
@@ -53,14 +53,14 @@ export default function BrandServicePageTemplate({ brandPage }) {
   const { service, brand, image, otherBrands } = brandPage;
   const shortLower = service.shortName.toLowerCase();
   const pageTitle = `${brand} ${service.shortName} Service & Repair in Kolkata`;
-  const pageDescription = `${brand} ${shortLower} service and repair at your doorstep in Kolkata. Starting from ₹${service.startingPrice}, 1 Year Service Warranty. Independent service provider — book online, call or WhatsApp.`;
+  const pageDescription = `${brand} ${shortLower} service and repair at your doorstep in Kolkata. Starting from ₹${service.startingPrice}, 1 Year Service Warranty. Book online, call or WhatsApp.`;
   const pagePath = `/services/${service.urlSegment}/${brandPage.brandSlug}`;
   const bookHref = `/?service=${encodeURIComponent(service.name)}&brand=${encodeURIComponent(brand)}#booking`;
   const whatsappMessage = `Hello Coolviro Services, I need ${brand} ${shortLower} service in Kolkata.`;
   const faqs = buildFaqs(brand, service);
   const schemaService = {
     name: `${brand} ${service.name}`,
-    overview: `Coolviro Services provides independent ${brand} ${shortLower} service and repair at your doorstep in Kolkata. We are not an authorized service center or official partner of ${brand}.`,
+    overview: `Coolviro Services provides ${brand} ${shortLower} service and repair at your doorstep in Kolkata.`,
     startingPrice: service.startingPrice,
   };
 
@@ -178,7 +178,7 @@ export default function BrandServicePageTemplate({ brandPage }) {
             </p>
           </div>
 
-          <p className="brand-disclaimer">{brandPageDisclaimer}</p>
+          <p className="brand-disclaimer">{brandDisclaimer}</p>
         </div>
       </section>
 
@@ -241,7 +241,6 @@ export default function BrandServicePageTemplate({ brandPage }) {
               </Link>
             ))}
           </div>
-          <p className="brand-disclaimer">{brandPageDisclaimer}</p>
         </div>
       </section>
 
