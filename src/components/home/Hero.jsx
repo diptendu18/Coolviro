@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { CallButton, WhatsappButton, BookButton } from '@/components/ui/CTAButtons';
 import { ShieldCheckIcon } from '@/components/ui/Icons';
 import { site } from '@/data/site';
@@ -23,6 +24,16 @@ export default function Hero() {
             <span>{site.warrantyHighlight} &middot; {site.experienceHighlight}</span>
           </div>
         </div>
+        <div className="hero-media">
+          <Image
+            src="/images/hero/hero-technician.webp"
+            alt="Coolviro Services technician with AC, refrigerator, geyser, microwave and washing machine"
+            width={736}
+            height={1024}
+            priority
+            sizes="(max-width: 900px) 80vw, 420px"
+          />
+        </div>
       </div>
       <style jsx>{`
         .hero {
@@ -40,9 +51,25 @@ export default function Hero() {
         }
         .hero-inner {
           position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--space-7);
         }
         .hero-copy {
-          max-width: 760px;
+          max-width: 620px;
+        }
+        .hero-media {
+          flex-shrink: 0;
+          width: 340px;
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        .hero-media :global(img) {
+          display: block;
+          width: 100%;
+          height: auto;
         }
         .hero-eyebrow {
           color: #bfe3ff;
@@ -81,6 +108,20 @@ export default function Hero() {
           border-radius: var(--radius-full);
           font-weight: 600;
           font-size: 0.92rem;
+        }
+        @media (max-width: 900px) {
+          .hero-inner {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .hero-copy {
+            max-width: none;
+          }
+          .hero-media {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+          }
         }
         @media (max-width: 640px) {
           .hero {

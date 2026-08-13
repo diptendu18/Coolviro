@@ -80,23 +80,28 @@ export const footerLegalLinks = [
 export const howItWorks = [
   {
     step: '01',
-    title: 'Book a Service',
+    title: 'Book Service',
     description: 'Fill out the online booking form or call/WhatsApp us with your appliance issue and address.',
   },
   {
     step: '02',
-    title: 'Booking Confirmation',
-    description: 'We review your request and confirm your service booking details.',
+    title: 'Technician Visit',
+    description: 'A technician visits your doorstep in Kolkata at the scheduled time.',
   },
   {
     step: '03',
-    title: 'Technician Visit',
-    description: 'A technician visits your doorstep in Kolkata to inspect and service your appliance.',
+    title: 'Diagnosis',
+    description: 'We inspect your appliance and identify the issue accurately.',
   },
   {
     step: '04',
-    title: 'Service Completed',
-    description: 'Your appliance is repaired and serviced, backed by our 1 Year Service Warranty.',
+    title: 'Repair',
+    description: 'We repair your appliance using genuine parts and the right tools.',
+  },
+  {
+    step: '05',
+    title: 'Service Complete',
+    description: 'Your appliance is fully working again, backed by our 1 Year Service Warranty.',
   },
 ];
 

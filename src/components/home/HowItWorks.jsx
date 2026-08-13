@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { howItWorks } from '@/data/site';
 
 export default function HowItWorks() {
@@ -8,7 +9,7 @@ export default function HowItWorks() {
           <span className="eyebrow">Simple Process</span>
           <h2>How It Works</h2>
         </div>
-        <div className="grid grid-4 how-grid">
+        <div className="grid grid-5 how-grid">
           {howItWorks.map((step) => (
             <div className="how-step card" key={step.step}>
               <span className="how-step-number">{step.step}</span>
@@ -16,6 +17,15 @@ export default function HowItWorks() {
               <p>{step.description}</p>
             </div>
           ))}
+        </div>
+        <div className="how-it-works-media">
+          <Image
+            src="/images/how-it-works/how-it-works-process.webp"
+            alt="Coolviro Services process: book service, technician visit, diagnosis, repair, service complete"
+            width={1717}
+            height={726}
+            sizes="(max-width: 900px) 100vw, 1100px"
+          />
         </div>
       </div>
       <style jsx>{`
@@ -42,6 +52,17 @@ export default function HowItWorks() {
         .how-step p {
           margin: 0;
           font-size: 0.92rem;
+        }
+        .how-it-works-media {
+          margin-top: var(--space-7);
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          box-shadow: var(--shadow-md, 0 10px 30px rgba(0, 0, 0, 0.08));
+        }
+        .how-it-works-media :global(img) {
+          display: block;
+          width: 100%;
+          height: auto;
         }
       `}</style>
     </section>

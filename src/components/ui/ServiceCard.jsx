@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import ApplianceArt from './ApplianceArt';
 import { ChevronRightIcon } from './Icons';
 
@@ -6,7 +7,17 @@ export default function ServiceCard({ service }) {
   return (
     <article className="service-card card">
       <div className="service-card-art">
-        <ApplianceArt type={service.icon} />
+        {service.cardImage ? (
+          <Image
+            src={service.cardImage}
+            alt={service.name}
+            width={700}
+            height={467}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+          />
+        ) : (
+          <ApplianceArt type={service.icon} />
+        )}
       </div>
       <div className="service-card-body">
         <h3>{service.name}</h3>
@@ -29,6 +40,14 @@ export default function ServiceCard({ service }) {
         .service-card-art {
           padding: var(--space-4);
           padding-bottom: 0;
+        }
+        .service-card-art :global(img) {
+          display: block;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 700 / 467;
+          object-fit: cover;
+          border-radius: var(--radius-md);
         }
         .service-card-body {
           padding: var(--space-5);
