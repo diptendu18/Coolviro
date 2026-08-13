@@ -73,7 +73,7 @@ export default function QuickInfoBar() {
       </div>
       <style jsx>{`
         .quick-info {
-          background: var(--color-bg-section);
+          background: #fff;
         }
         .quick-info-grid {
           display: grid;

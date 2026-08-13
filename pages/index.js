@@ -6,7 +6,6 @@ import TrustSection from '@/components/home/TrustSection';
 import ServiceAreasPreview from '@/components/home/ServiceAreasPreview';
 import QuickInfoBar from '@/components/home/QuickInfoBar';
 import ReviewsSection from '@/components/home/ReviewsSection';
-import FinalCTA from '@/components/home/FinalCTA';
 
 export default function HomePage() {
   return (
@@ -22,7 +21,6 @@ export default function HomePage() {
       <TrustSection />
       <ServiceAreasPreview />
       <ReviewsSection />
-      <FinalCTA />
       <QuickInfoBar />
     </>
   );
