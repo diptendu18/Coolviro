@@ -12,17 +12,15 @@ import { slugifyBrand } from '@/data/brandPages';
 import { serviceAreas } from '@/data/site';
 
 // Real, unbranded product photos of each appliance (no technician, no
-// logos/text) — cropped from the existing repository photography. Each
-// crop has its own aspect ratio (e.g. the washing machine crop is tall,
-// the geyser crop is wide), so the hero art container uses a fixed
-// aspect ratio with object-fit: contain to show every appliance in full
-// without cropping or distorting it.
+// logos/text). Each photo has its own aspect ratio, so the hero art
+// container uses a fixed aspect ratio with object-fit: contain to show
+// every appliance in full without cropping or distorting it.
 const HERO_IMAGE_ALT = {
   ac: 'Split air conditioner unit',
   fridge: 'Refrigerator',
   geyser: 'Wall-mounted water heater (geyser) unit',
   microwave: 'Microwave oven',
-  washingMachine: 'Front-load washing machine',
+  washingMachine: 'Top-load washing machine',
 };
 
 export default function ServicePageTemplate({ service }) {
