@@ -31,7 +31,7 @@ export default function Hero() {
             width={736}
             height={1024}
             priority
-            sizes="(max-width: 900px) 80vw, 420px"
+            sizes="(max-width: 900px) 80vw, 480px"
           />
         </div>
       </div>
@@ -57,11 +57,11 @@ export default function Hero() {
           gap: var(--space-7);
         }
         .hero-copy {
-          max-width: 620px;
+          max-width: 560px;
         }
         .hero-media {
           flex-shrink: 0;
-          width: 340px;
+          width: 460px;
           border-radius: var(--radius-lg);
           overflow: hidden;
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
@@ -109,6 +109,11 @@ export default function Hero() {
           font-weight: 600;
           font-size: 0.92rem;
         }
+        @media (max-width: 1150px) {
+          .hero-media {
+            width: 380px;
+          }
+        }
         @media (max-width: 900px) {
           .hero-inner {
             flex-direction: column;
@@ -119,7 +124,7 @@ export default function Hero() {
           }
           .hero-media {
             width: 100%;
-            max-width: 320px;
+            max-width: 340px;
             margin: 0 auto;
           }
         }
