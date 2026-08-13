@@ -57,18 +57,20 @@ export const serviceAreas = [
 
 export const mainNavLinks = [
   { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
   { label: 'Services', href: '/services' },
-  { label: 'Areas', href: '/areas' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Brands', href: '/brands' },
+  { label: 'Service Areas', href: '/areas' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 export const footerNavLinks = [
   { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
   { label: 'Services', href: '/services' },
-  { label: 'Areas', href: '/areas' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Brands', href: '/brands' },
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Write a Review', href: '/write-a-review' },
 ];
 
 export const footerLegalLinks = [
@@ -106,8 +108,40 @@ export const howItWorks = [
 ];
 
 export const trustHighlights = [
-  { label: '10 Years Experienced Technicians', icon: 'experience' },
-  { label: '500+ Customers Served', icon: 'customers' },
-  { label: '1 Year Service Warranty', icon: 'warranty' },
-  { label: 'Doorstep Service', icon: 'doorstep' },
+  { title: '10 Years', subtitle: 'Experienced Technicians', icon: 'experience' },
+  { title: '500+', subtitle: 'Customers Served', icon: 'customers' },
+  { title: 'Doorstep', subtitle: 'Service', icon: 'doorstep' },
+  { title: 'Genuine', subtitle: 'Parts Guaranteed', icon: 'parts' },
+  { title: '1 Year', subtitle: 'Service Warranty', icon: 'warranty' },
+  { title: 'Affordable', subtitle: 'Pricing', icon: 'pricing' },
+];
+
+// Compact quick-info strip shown near the Service Areas section.
+export const quickInfo = [
+  {
+    icon: 'areas',
+    title: 'Service Areas',
+    description: `We provide our services all over ${site.city} and nearby areas.`,
+    linkLabel: 'View Areas',
+    linkHref: '/areas',
+  },
+  {
+    icon: 'hours',
+    title: 'Working Hours',
+    description: `Open every day, ${site.workingHours}.`,
+  },
+  {
+    icon: 'help',
+    title: 'Need Help?',
+    description: 'Call or WhatsApp us anytime for booking or any queries.',
+    linkLabel: site.phoneDisplay,
+    linkHref: site.phoneHref,
+  },
+  {
+    icon: 'book',
+    title: 'Book Your Service',
+    description: 'Quick & easy online booking — our technician will reach you soon.',
+    linkLabel: 'Book Now',
+    linkHref: '/booking',
+  },
 ];

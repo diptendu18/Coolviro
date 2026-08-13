@@ -160,6 +160,22 @@ export function SparklesIcon(props) {
   );
 }
 
+export function RupeeIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" {...base} {...props}>
+      <path d="M6 4h12M6 8h12M6 4c4 0 7 1.5 7 4s-3 4-7 4h-1l8 8" />
+    </svg>
+  );
+}
+
+export function ArrowRightIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...base} {...props}>
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 export function AlertIcon(props) {
   return (
     <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" {...base} {...props}>

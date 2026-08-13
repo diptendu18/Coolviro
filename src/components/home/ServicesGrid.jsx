@@ -6,8 +6,8 @@ export default function ServicesGrid() {
     <section className="section" id="services">
       <div className="container">
         <div className="section-heading section-heading--center">
-          <span className="eyebrow">What We Repair</span>
-          <h2>Our Services</h2>
+          <span className="eyebrow">Our Services</span>
+          <h2>We Repair &amp; Service All Major Home Appliances</h2>
           <p>
             Doorstep repair and service for the appliances Kolkata households
             rely on every day — backed by a 1 Year Service Warranty.

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Logo from '@/components/ui/Logo';
-import { PhoneIcon, WhatsappIcon, ClockIcon } from '@/components/ui/Icons';
-import { site, footerNavLinks, footerLegalLinks } from '@/data/site';
+import { PhoneIcon, WhatsappIcon, ClockIcon, MapPinIcon } from '@/components/ui/Icons';
+import { site, footerNavLinks, footerLegalLinks, serviceAreas } from '@/data/site';
 import { services } from '@/data/services';
 
 export default function Footer() {
@@ -19,6 +19,50 @@ export default function Footer() {
             service at your doorstep across Kolkata — AC, refrigerator,
             geyser, microwave oven and washing machine.
           </p>
+        </div>
+
+        <nav aria-label="Footer quick links">
+          <h3>Quick Links</h3>
+          <ul>
+            {footerNavLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="Our services">
+          <h3>Services</h3>
+          <ul>
+            {services.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/services/${s.slug}`}>{s.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="Service areas">
+          <h3>Service Areas</h3>
+          <ul>
+            {serviceAreas.slice(0, 5).map((area) => (
+              <li key={area}>
+                <Link href="/areas">
+                  <MapPinIcon width="14" height="14" /> {area}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link href="/areas" className="site-footer-areas-more">
+                View All Areas →
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="site-footer-contact-col">
+          <h3>Contact Us</h3>
           <ul className="site-footer-contact">
             <li>
               <a href={site.phoneHref}>
@@ -37,39 +81,6 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-
-        <nav aria-label="Footer navigation">
-          <h3>Explore</h3>
-          <ul>
-            {footerNavLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <nav aria-label="Our services">
-          <h3>Our Services</h3>
-          <ul>
-            {services.map((s) => (
-              <li key={s.slug}>
-                <Link href={`/services/${s.slug}`}>{s.shortName}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <nav aria-label="Legal">
-          <h3>Legal</h3>
-          <ul>
-            {footerLegalLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
 
       <div className="container site-footer-bottom">
@@ -77,6 +88,14 @@ export default function Footer() {
           &copy; {year} {site.siteName}. All rights reserved. Serving {site.city} and
           nearby areas.
         </p>
+        <ul className="site-footer-legal">
+          {footerLegalLinks.map((link, i) => (
+            <li key={link.href}>
+              {i > 0 && <span aria-hidden="true">|</span>}
+              <Link href={link.href}>{link.label}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <style jsx>{`
@@ -87,8 +106,8 @@ export default function Footer() {
         }
         .site-footer-grid {
           display: grid;
-          grid-template-columns: 1.6fr repeat(3, 1fr);
-          gap: var(--space-7);
+          grid-template-columns: 1.4fr repeat(4, 1fr);
+          gap: var(--space-6);
         }
         .site-footer-logo-badge {
           display: inline-flex;
@@ -133,30 +152,69 @@ export default function Footer() {
           gap: var(--space-3);
         }
         .site-footer nav a {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
           color: #94a3b8;
           font-size: 0.92rem;
         }
         .site-footer nav a:hover {
           color: var(--color-secondary);
         }
+        .site-footer-areas-more {
+          font-weight: 700;
+          color: var(--color-secondary) !important;
+        }
         .site-footer-bottom {
           border-top: 1px solid rgba(255, 255, 255, 0.1);
           margin-top: var(--space-7);
           padding-top: var(--space-5);
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--space-3);
         }
         .site-footer-bottom p {
           color: #64748b;
           font-size: 0.82rem;
           margin: 0;
         }
-        @media (max-width: 900px) {
+        .site-footer-legal {
+          list-style: none;
+          display: flex;
+          gap: var(--space-2);
+          margin: 0;
+        }
+        .site-footer-legal li {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-2);
+        }
+        .site-footer-legal a {
+          color: #94a3b8;
+          font-size: 0.82rem;
+        }
+        .site-footer-legal a:hover {
+          color: var(--color-secondary);
+        }
+        .site-footer-legal span {
+          color: #475569;
+        }
+        @media (max-width: 1024px) {
           .site-footer-grid {
             grid-template-columns: 1fr 1fr;
+          }
+          .site-footer-brand {
+            grid-column: 1 / -1;
           }
         }
         @media (max-width: 560px) {
           .site-footer-grid {
             grid-template-columns: 1fr;
+          }
+          .site-footer-brand {
+            grid-column: auto;
           }
         }
       `}</style>

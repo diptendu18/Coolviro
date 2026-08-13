@@ -34,6 +34,7 @@ const staticRoutes = [
   '/services/geyser-service',
   '/services/microwave-oven-service',
   '/services/washing-machine-service',
+  '/brands',
   '/areas',
   '/about',
   '/contact',
