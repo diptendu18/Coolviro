@@ -12,15 +12,16 @@ import { slugifyBrand } from '@/data/brandPages';
 import { serviceAreas } from '@/data/site';
 
 // Real, unbranded product photos of each appliance (no technician, no
-// logos/text). Each photo has its own aspect ratio, so the hero art
-// container uses a fixed aspect ratio with object-fit: contain to show
-// every appliance in full without cropping or distorting it.
-const HERO_IMAGE_ALT = {
-  ac: 'Split air conditioner unit',
-  fridge: 'Refrigerator',
-  geyser: 'Wall-mounted water heater (geyser) unit',
-  microwave: 'Microwave oven',
-  washingMachine: 'Top-load washing machine',
+// logos/text). Each photo keeps its own natural aspect ratio (via its
+// real pixel width/height below) so the hero art box always sizes itself
+// to fit the photo exactly — same max-width, border radius, shadow and
+// responsive behavior on every page, zero letterboxing, zero cropping.
+const HERO_IMAGE = {
+  ac: { alt: 'Split air conditioner unit', width: 1000, height: 667 },
+  fridge: { alt: 'Refrigerator', width: 900, height: 1350 },
+  geyser: { alt: 'Wall-mounted water heater (geyser) unit', width: 900, height: 1036 },
+  microwave: { alt: 'Microwave oven', width: 1000, height: 667 },
+  washingMachine: { alt: 'Top-load washing machine', width: 900, height: 1125 },
 };
 
 export default function ServicePageTemplate({ service }) {
@@ -64,8 +65,9 @@ export default function ServicePageTemplate({ service }) {
           <div className="service-hero-art">
             <Image
               src={`/images/services/${service.slug}-hero.webp`}
-              alt={HERO_IMAGE_ALT[service.icon]}
-              fill
+              alt={HERO_IMAGE[service.icon].alt}
+              width={HERO_IMAGE[service.icon].width}
+              height={HERO_IMAGE[service.icon].height}
               priority
               sizes="(max-width: 860px) 60vw, 320px"
             />
@@ -229,10 +231,8 @@ export default function ServicePageTemplate({ service }) {
           gap: var(--space-3);
         }
         .service-hero-art {
-          position: relative;
           width: 100%;
           max-width: 320px;
-          aspect-ratio: 4 / 5;
           margin: 0 auto;
           background: #fff;
           border-radius: var(--radius-lg);
@@ -240,6 +240,9 @@ export default function ServicePageTemplate({ service }) {
           box-shadow: var(--shadow-md);
         }
         .service-hero-art :global(img) {
+          display: block;
+          width: 100%;
+          height: auto;
           object-fit: contain;
         }
         .service-overview-text {
