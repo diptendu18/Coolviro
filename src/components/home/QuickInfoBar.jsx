@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { quickInfo } from '@/data/site';
-import { MapPinIcon, ClockIcon, PhoneIcon, CalendarCheckIcon } from '@/components/ui/Icons';
+import { MapPinIcon, ClockIcon, PhoneIcon, CalendarCheckIcon, WhatsappIcon } from '@/components/ui/Icons';
 
 const ICONS = {
   areas: MapPinIcon,
@@ -9,72 +9,131 @@ const ICONS = {
   book: CalendarCheckIcon,
 };
 
+function isInternal(href = '') {
+  return href.startsWith('/') && !href.startsWith('//');
+}
+
+function ItemLink({ href, children }) {
+  if (isInternal(href)) {
+    return (
+      <Link href={href} className="quick-info-link">
+        {children}
+      </Link>
+    );
+  }
+  return (
+    <a
+      href={href}
+      className="quick-info-link"
+      target={href.startsWith('http') ? '_blank' : undefined}
+      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+    >
+      {children}
+    </a>
+  );
+}
+
 export default function QuickInfoBar() {
   return (
-    <section className="quick-info" aria-label="Quick information">
-      <div className="container quick-info-grid">
-        {quickInfo.map((item) => {
-          const Icon = ICONS[item.icon];
-          return (
-            <div className="quick-info-item" key={item.title}>
-              <span className="quick-info-icon">
-                <Icon width="22" height="22" />
-              </span>
-              <div className="quick-info-body">
+    <section className="quick-info" aria-label="Contact and service information">
+      <div className="container">
+        <div className="section-heading section-heading--center">
+          <span className="eyebrow">Get In Touch</span>
+          <h2>Service Information</h2>
+        </div>
+        <div className="quick-info-grid">
+          {quickInfo.map((item) => {
+            const Icon = ICONS[item.icon];
+            return (
+              <div className="quick-info-item card" key={item.title}>
+                <span className="quick-info-icon">
+                  <Icon width="24" height="24" />
+                </span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-                {item.linkHref && (
-                  <Link href={item.linkHref} className="quick-info-link">
-                    {item.linkLabel}
-                  </Link>
-                )}
+                <div className="quick-info-actions">
+                  {item.linkHref && <ItemLink href={item.linkHref}>{item.linkLabel}</ItemLink>}
+                  {item.whatsappHref && (
+                    <a
+                      href={item.whatsappHref}
+                      className="quick-info-icon-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Chat with Coolviro Services on WhatsApp"
+                    >
+                      <WhatsappIcon width="18" height="18" />
+                      WhatsApp
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       <style jsx>{`
         .quick-info {
-          background: var(--color-primary-dark);
-          color: #fff;
-          padding: var(--space-6) 0;
+          background: var(--color-bg-section);
         }
         .quick-info-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: var(--space-6);
+          gap: var(--space-5);
         }
         .quick-info-item {
           display: flex;
-          gap: var(--space-3);
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding: var(--space-6) var(--space-5);
         }
         .quick-info-icon {
           flex-shrink: 0;
-          width: 44px;
-          height: 44px;
-          border-radius: var(--radius-md);
-          background: rgba(255, 255, 255, 0.12);
+          width: 52px;
+          height: 52px;
+          border-radius: var(--radius-full);
+          background: var(--color-bg-section);
+          color: var(--color-primary);
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          margin-bottom: var(--space-4);
         }
-        .quick-info-body h3 {
-          color: #fff;
-          font-size: 0.95rem;
-          margin: 0 0 4px;
+        .quick-info-item h3 {
+          font-size: 1rem;
+          margin-bottom: var(--space-2);
         }
-        .quick-info-body p {
-          color: #bfdcff;
-          font-size: 0.85rem;
-          margin: 0 0 6px;
+        .quick-info-item p {
+          font-size: 0.88rem;
+          color: var(--color-text-muted);
+          margin: 0 0 var(--space-4);
+        }
+        .quick-info-actions {
+          margin-top: auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--space-2);
         }
         .quick-info-link {
           display: inline-block;
-          font-size: 0.82rem;
+          font-size: 0.92rem;
           font-weight: 700;
-          color: #fff;
+          color: var(--color-primary);
+        }
+        .quick-info-link:hover {
           text-decoration: underline;
-          text-underline-offset: 3px;
+        }
+        .quick-info-icon-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #16a34a;
+        }
+        .quick-info-icon-link:hover {
+          text-decoration: underline;
         }
         @media (max-width: 900px) {
           .quick-info-grid {

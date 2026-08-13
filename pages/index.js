@@ -21,9 +21,9 @@ export default function HomePage() {
       <HowItWorks />
       <TrustSection />
       <ServiceAreasPreview />
-      <QuickInfoBar />
       <ReviewsSection />
       <FinalCTA />
+      <QuickInfoBar />
     </>
   );
 }

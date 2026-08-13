@@ -116,7 +116,8 @@ export const trustHighlights = [
   { title: 'Affordable', subtitle: 'Pricing', icon: 'pricing' },
 ];
 
-// Compact quick-info strip shown near the Service Areas section.
+// Service-information blocks shown in the Contact / Service Information
+// section immediately before the footer (see QuickInfoBar.jsx).
 export const quickInfo = [
   {
     icon: 'areas',
@@ -136,6 +137,7 @@ export const quickInfo = [
     description: 'Call or WhatsApp us anytime for booking or any queries.',
     linkLabel: site.phoneDisplay,
     linkHref: site.phoneHref,
+    whatsappHref: site.whatsappHref,
   },
   {
     icon: 'book',
