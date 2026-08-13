@@ -12,15 +12,17 @@ import { slugifyBrand } from '@/data/brandPages';
 import { serviceAreas } from '@/data/site';
 
 // Real, unbranded product photos of each appliance (no technician, no
-// logos/text) — cropped from the existing repository photography. Pixel
-// size matches each source crop's own aspect ratio, so object-fit: cover
-// scales cleanly without cropping the appliance itself.
-const HERO_IMAGE = {
-  ac: { alt: 'Split air conditioner unit', width: 220, height: 300 },
-  fridge: { alt: 'Refrigerator', width: 220, height: 340 },
-  geyser: { alt: 'Wall-mounted water heater (geyser) unit', width: 330, height: 185 },
-  microwave: { alt: 'Microwave oven', width: 180, height: 370 },
-  washingMachine: { alt: 'Front-load washing machine', width: 220, height: 560 },
+// logos/text) — cropped from the existing repository photography. Each
+// crop has its own aspect ratio (e.g. the washing machine crop is tall,
+// the geyser crop is wide), so the hero art container uses a fixed
+// aspect ratio with object-fit: contain to show every appliance in full
+// without cropping or distorting it.
+const HERO_IMAGE_ALT = {
+  ac: 'Split air conditioner unit',
+  fridge: 'Refrigerator',
+  geyser: 'Wall-mounted water heater (geyser) unit',
+  microwave: 'Microwave oven',
+  washingMachine: 'Front-load washing machine',
 };
 
 export default function ServicePageTemplate({ service }) {
@@ -64,9 +66,8 @@ export default function ServicePageTemplate({ service }) {
           <div className="service-hero-art">
             <Image
               src={`/images/services/${service.slug}-hero.webp`}
-              alt={HERO_IMAGE[service.icon].alt}
-              width={HERO_IMAGE[service.icon].width}
-              height={HERO_IMAGE[service.icon].height}
+              alt={HERO_IMAGE_ALT[service.icon]}
+              fill
               priority
               sizes="(max-width: 860px) 60vw, 320px"
             />
@@ -230,17 +231,18 @@ export default function ServicePageTemplate({ service }) {
           gap: var(--space-3);
         }
         .service-hero-art {
+          position: relative;
+          width: 100%;
           max-width: 320px;
+          aspect-ratio: 4 / 5;
           margin: 0 auto;
+          background: #fff;
           border-radius: var(--radius-lg);
           overflow: hidden;
           box-shadow: var(--shadow-md);
         }
         .service-hero-art :global(img) {
-          display: block;
-          width: 100%;
-          height: auto;
-          object-fit: cover;
+          object-fit: contain;
         }
         .service-overview-text {
           font-size: 1.05rem;
