@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { serviceNameOptions, applianceTypesByServiceName, brandsByServiceName } from '@/data/services';
 import { validateBookingForm, OTHER_BRAND_VALUE } from '@/utils/validation';
-import { AlertIcon, CheckIcon } from '@/components/ui/Icons';
+import { buildBookingWhatsAppMessage } from '@/utils/whatsapp';
+import { site } from '@/data/site';
+import { AlertIcon, CheckIcon, WhatsappIcon } from '@/components/ui/Icons';
 
 const EMPTY_FORM = {
   name: '',
@@ -21,8 +23,9 @@ export default function BookingForm() {
   const [values, setValues] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
-  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
+  const [status, setStatus] = useState('idle'); // idle | success | error
   const [serverError, setServerError] = useState('');
+  const [whatsappUrl, setWhatsappUrl] = useState('');
   const liveRegionRef = useRef(null);
 
   useEffect(() => {
@@ -92,7 +95,7 @@ export default function BookingForm() {
     setErrors((e) => ({ ...e, [field]: fieldErrors[field] }));
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     setServerError('');
 
@@ -126,34 +129,20 @@ export default function BookingForm() {
       return;
     }
 
-    setStatus('submitting');
-    try {
-      const res = await fetch('/api/booking', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
-      });
-      const data = await res.json().catch(() => ({}));
+    // No server round-trip and no email — build the pre-filled WhatsApp
+    // message client-side and hand off straight to WhatsApp. This must run
+    // synchronously inside the click handler (no await beforehand) so the
+    // browser still treats window.open as a direct result of the user's
+    // click and doesn't block it as a popup.
+    const message = buildBookingWhatsAppMessage(values);
+    const url = site.whatsappHrefWithText(message);
+    setWhatsappUrl(url);
+    window.open(url, '_blank', 'noopener,noreferrer');
 
-      if (!res.ok || !data.success) {
-        setStatus('error');
-        setServerError(
-          data.message ||
-            'We could not submit your request right now. Please call or WhatsApp us directly.'
-        );
-        return;
-      }
-
-      setStatus('success');
-      setValues(EMPTY_FORM);
-      setErrors({});
-      setTouched({});
-    } catch (err) {
-      setStatus('error');
-      setServerError(
-        'We could not submit your request right now. Please check your connection or call/WhatsApp us directly.'
-      );
-    }
+    setStatus('success');
+    setValues(EMPTY_FORM);
+    setErrors({});
+    setTouched({});
   }
 
   if (status === 'success') {
@@ -162,8 +151,21 @@ export default function BookingForm() {
         <div className="booking-success-icon">
           <CheckIcon width="28" height="28" />
         </div>
-        <h3>Booking Request Submitted</h3>
-        <p>Booking request submitted successfully. We will contact you shortly.</p>
+        <h3>Almost Done — Send Your Booking on WhatsApp</h3>
+        <p>
+          We&apos;ve opened WhatsApp with your booking details filled in. Please review the
+          message and tap Send to confirm your booking.
+        </p>
+        {whatsappUrl && (
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-whatsapp"
+          >
+            <WhatsappIcon /> <span>Didn&apos;t open? Tap here</span>
+          </a>
+        )}
         <button type="button" className="btn btn-secondary" onClick={() => setStatus('idle')}>
           Book Another Service
         </button>
@@ -186,6 +188,9 @@ export default function BookingForm() {
           .booking-success p {
             max-width: 42ch;
             margin: 0 auto var(--space-5);
+          }
+          .booking-success :global(.btn) {
+            margin: 0 var(--space-2) var(--space-3);
           }
         `}</style>
       </div>
