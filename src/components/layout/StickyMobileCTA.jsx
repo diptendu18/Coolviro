@@ -37,7 +37,7 @@ export default function StickyMobileCTA() {
           padding-bottom: max(var(--space-2), env(safe-area-inset-bottom));
           gap: var(--space-2);
         }
-        .sticky-cta-item {
+        :global(.sticky-cta-item) {
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -50,14 +50,14 @@ export default function StickyMobileCTA() {
           font-weight: 700;
           color: var(--color-text);
         }
-        .sticky-cta-item:hover {
+        :global(.sticky-cta-item:hover) {
           background: var(--color-bg-section);
         }
-        .sticky-cta-primary {
+        :global(.sticky-cta-primary) {
           background: var(--gradient-primary);
           color: #fff;
         }
-        .sticky-cta-primary:hover {
+        :global(.sticky-cta-primary:hover) {
           background: var(--gradient-primary);
           opacity: 0.92;
         }

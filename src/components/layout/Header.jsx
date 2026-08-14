@@ -209,7 +209,7 @@ export default function Header() {
           align-items: center;
           gap: var(--space-5);
         }
-        .site-header-logo {
+        :global(.site-header-logo) {
           display: inline-flex;
           margin-right: auto;
         }
@@ -221,7 +221,7 @@ export default function Header() {
         .site-header-nav li {
           position: relative;
         }
-        .site-header-nav a {
+        .site-header-nav :global(a) {
           display: inline-flex;
           align-items: center;
           gap: 4px;
@@ -230,11 +230,11 @@ export default function Header() {
           padding: var(--space-2) 0;
           position: relative;
         }
-        .site-header-nav a:hover,
-        .site-header-nav a.is-active {
+        .site-header-nav :global(a:hover),
+        .site-header-nav :global(a.is-active) {
           color: var(--color-primary);
         }
-        .site-header-nav a.is-active::after {
+        .site-header-nav :global(a.is-active::after) {
           content: '';
           position: absolute;
           left: 0;
@@ -270,7 +270,7 @@ export default function Header() {
           display: flex;
           flex-direction: column;
         }
-        .site-header-dropdown a {
+        .site-header-dropdown :global(a) {
           display: block;
           padding: var(--space-3) var(--space-4);
           border-radius: var(--radius-sm);
@@ -278,7 +278,7 @@ export default function Header() {
           font-weight: 600;
           white-space: nowrap;
         }
-        .site-header-dropdown a:hover {
+        .site-header-dropdown :global(a:hover) {
           background: var(--color-bg-section);
         }
         .site-header-dropdown-all {
@@ -286,7 +286,7 @@ export default function Header() {
           margin-top: var(--space-1);
           padding-top: var(--space-1);
         }
-        .site-header-dropdown-all a {
+        .site-header-dropdown-all :global(a) {
           color: var(--color-primary);
         }
         .site-header-ctas {

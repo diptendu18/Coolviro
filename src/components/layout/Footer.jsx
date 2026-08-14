@@ -109,7 +109,7 @@ export default function Footer() {
           grid-template-columns: 1.4fr repeat(4, 1fr);
           gap: var(--space-6);
         }
-        .site-footer-logo-badge {
+        :global(.site-footer-logo-badge) {
           display: inline-flex;
           background: #fff;
           border-radius: var(--radius-md);
@@ -151,17 +151,17 @@ export default function Footer() {
           flex-direction: column;
           gap: var(--space-3);
         }
-        .site-footer nav a {
+        .site-footer nav :global(a) {
           display: inline-flex;
           align-items: center;
           gap: 6px;
           color: #94a3b8;
           font-size: 0.92rem;
         }
-        .site-footer nav a:hover {
+        .site-footer nav :global(a:hover) {
           color: var(--color-secondary);
         }
-        .site-footer-areas-more {
+        :global(.site-footer-areas-more) {
           font-weight: 700;
           color: var(--color-secondary) !important;
         }
@@ -191,11 +191,11 @@ export default function Footer() {
           align-items: center;
           gap: var(--space-2);
         }
-        .site-footer-legal a {
+        .site-footer-legal :global(a) {
           color: #94a3b8;
           font-size: 0.82rem;
         }
-        .site-footer-legal a:hover {
+        .site-footer-legal :global(a:hover) {
           color: var(--color-secondary);
         }
         .site-footer-legal span {

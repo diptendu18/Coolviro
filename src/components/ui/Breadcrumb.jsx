@@ -61,10 +61,10 @@ export default function Breadcrumb({ items }) {
           align-items: center;
           gap: var(--space-2);
         }
-        .breadcrumb a {
+        .breadcrumb :global(a) {
           color: var(--color-text-muted);
         }
-        .breadcrumb a:hover {
+        .breadcrumb :global(a:hover) {
           color: var(--color-primary);
           text-decoration: underline;
         }

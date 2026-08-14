@@ -115,13 +115,13 @@ export default function QuickInfoBar() {
           align-items: center;
           gap: var(--space-2);
         }
-        .quick-info-link {
+        :global(.quick-info-link) {
           display: inline-block;
           font-size: 0.92rem;
           font-weight: 700;
           color: var(--color-primary);
         }
-        .quick-info-link:hover {
+        :global(.quick-info-link:hover) {
           text-decoration: underline;
         }
         .quick-info-icon-link {

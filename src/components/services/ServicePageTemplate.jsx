@@ -285,7 +285,7 @@ export default function ServicePageTemplate({ service }) {
           grid-template-columns: repeat(5, 1fr);
           gap: var(--space-4);
         }
-        .brand-logo-card {
+        :global(.brand-logo-card) {
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -297,7 +297,7 @@ export default function ServicePageTemplate({ service }) {
           border-radius: var(--radius-md);
           transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-        .brand-logo-card:hover {
+        :global(.brand-logo-card:hover) {
           transform: translateY(-3px);
           box-shadow: var(--shadow-md);
           border-color: var(--color-secondary);
@@ -331,7 +331,7 @@ export default function ServicePageTemplate({ service }) {
         .brand-logo-card-cta :global(svg) {
           transition: transform 0.2s ease;
         }
-        .brand-logo-card:hover .brand-logo-card-cta :global(svg) {
+        :global(.brand-logo-card:hover) .brand-logo-card-cta :global(svg) {
           transform: translateX(2px);
         }
         @media (max-width: 1100px) {
@@ -349,7 +349,7 @@ export default function ServicePageTemplate({ service }) {
             grid-template-columns: repeat(2, 1fr);
             gap: var(--space-3);
           }
-          .brand-logo-card {
+          :global(.brand-logo-card) {
             padding: var(--space-3) var(--space-2);
           }
         }

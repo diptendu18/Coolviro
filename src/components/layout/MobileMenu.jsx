@@ -166,14 +166,14 @@ export default function MobileMenu({ open, onClose }) {
           flex-direction: column;
           gap: var(--space-1);
         }
-        .mobile-menu-links a {
+        .mobile-menu-links :global(a) {
           display: block;
           padding: var(--space-3) var(--space-2);
           font-weight: 700;
           font-size: 1.1rem;
           border-radius: var(--radius-sm);
         }
-        .mobile-menu-links a:hover {
+        .mobile-menu-links :global(a:hover) {
           background: var(--color-bg-section);
           color: var(--color-primary);
         }

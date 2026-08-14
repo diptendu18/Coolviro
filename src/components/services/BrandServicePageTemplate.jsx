@@ -451,7 +451,7 @@ export default function BrandServicePageTemplate({ brandPage }) {
           flex-wrap: wrap;
           gap: var(--space-3);
         }
-        .other-brand-pill {
+        :global(.other-brand-pill) {
           display: inline-flex;
           align-items: center;
           max-width: 100%;
@@ -465,7 +465,7 @@ export default function BrandServicePageTemplate({ brandPage }) {
           border-radius: var(--radius-full);
           transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
         }
-        .other-brand-pill:hover {
+        :global(.other-brand-pill:hover) {
           border-color: var(--color-secondary);
           color: var(--color-primary);
           transform: translateY(-2px);
