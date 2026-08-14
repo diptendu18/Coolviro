@@ -106,7 +106,7 @@ export default function ServicePageTemplate({ service }) {
                 >
                   <div className="brand-logo-card-img">
                     <Image
-                      src={brand.image}
+                      src={brand.gridImage || brand.image}
                       alt={`${brand.name} ${service.shortName} — Coolviro Services repairs ${brand.name} ${service.applianceNounPlural} in Kolkata`}
                       width={700}
                       height={400}

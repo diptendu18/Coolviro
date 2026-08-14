@@ -135,7 +135,18 @@ export const services = [
       'Lloyd',
     ],
     brandLogos: [
-      { name: 'LG', image: '/images/brand/lg-fridge.webp' },
+      {
+        name: 'LG',
+        image: '/images/brand/lg-fridge.webp',
+        // The source photo for LG is cropped to a different (wider,
+        // shorter) aspect ratio than every other fridge brand photo here,
+        // which makes it render small/off inside the "Supported Brands"
+        // grid card. `gridImage` is a padded variant (same photo, extra
+        // matching-background canvas added — nothing cropped or
+        // stretched) used only by that grid so the brand hero page above
+        // keeps using the original, unpadded photo unchanged.
+        gridImage: '/images/brand/lg-fridge-grid.webp',
+      },
       { name: 'Samsung', image: '/images/brand/samsung-fridge.webp' },
       { name: 'Whirlpool', image: '/images/brand/whirlpool-fridge.webp' },
       { name: 'Godrej', image: '/images/brand/godrej-fridge.webp' },
