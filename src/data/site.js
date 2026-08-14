@@ -55,6 +55,22 @@ export const serviceAreas = [
   'Barrackpore',
 ];
 
+// Real manufacturer logos (uploaded to the repo) for the header's "We
+// Repair All Major Brands" strip. width/height are each logo's actual
+// pixel aspect ratio so next/image never stretches them.
+export const topBrandLogos = [
+  { name: 'LG', image: '/images/brand/lg-logo.webp', width: 500, height: 167 },
+  { name: 'Samsung', image: '/images/brand/samsung-logo.webp', width: 500, height: 167 },
+  { name: 'Whirlpool', image: '/images/brand/whirlpool-logo.webp', width: 500, height: 228 },
+  { name: 'Voltas', image: '/images/brand/voltas-logo.webp', width: 500, height: 200 },
+  { name: 'Bosch', image: '/images/brand/bosch-logo.webp', width: 500, height: 213 },
+  { name: 'Panasonic', image: '/images/brand/panasonic-logo.webp', width: 500, height: 167 },
+  { name: 'Hitachi', image: '/images/brand/hitachi-logo.webp', width: 500, height: 208 },
+  { name: 'Haier', image: '/images/brand/haier-logo.webp', width: 500, height: 200 },
+  { name: 'IFB', image: '/images/brand/ifb-logo.webp', width: 500, height: 281 },
+  { name: 'Godrej', image: '/images/brand/godrej-logo.webp', width: 500, height: 250 },
+];
+
 export const mainNavLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },

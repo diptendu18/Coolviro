@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { mainNavLinks, site } from '@/data/site';
+import { mainNavLinks, site, topBrandLogos } from '@/data/site';
 import { services } from '@/data/services';
 import Logo from '@/components/ui/Logo';
 import { BookButton } from '@/components/ui/CTAButtons';
@@ -23,20 +24,6 @@ export default function Header() {
     setMenuOpen(false);
   }, [router.asPath]);
 
-  const brandTicker = useMemo(() => {
-    const seen = new Set();
-    const names = [];
-    services.forEach((service) => {
-      service.brands.forEach((brand) => {
-        if (!seen.has(brand)) {
-          seen.add(brand);
-          names.push(brand);
-        }
-      });
-    });
-    return names.slice(0, 10);
-  }, []);
-
   return (
     <>
       <div className="site-topbar">
@@ -52,12 +39,22 @@ export default function Header() {
               <BadgeCheckIcon width="16" height="16" /> {site.warrantyHighlight}
             </li>
           </ul>
-          <p className="site-topbar-brands">
-            <span>We Repair All Major Brands</span>
-            {brandTicker.map((brand) => (
-              <span key={brand}>{brand}</span>
-            ))}
-          </p>
+          <div className="site-topbar-brands">
+            <span className="site-topbar-brands-label">We Repair All Major Brands</span>
+            <ul className="site-topbar-brands-list">
+              {topBrandLogos.map((brand) => (
+                <li key={brand.name} className="site-topbar-brand-logo">
+                  <Image
+                    src={brand.image}
+                    alt={brand.name}
+                    width={brand.width}
+                    height={brand.height}
+                    sizes="80px"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -139,14 +136,15 @@ export default function Header() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: var(--space-5);
+          flex-wrap: wrap;
+          gap: var(--space-3) var(--space-5);
           padding: var(--space-2) var(--space-5);
-          overflow: hidden;
         }
         .site-topbar-stats {
           list-style: none;
           display: flex;
-          gap: var(--space-5);
+          flex-wrap: wrap;
+          gap: var(--space-2) var(--space-5);
           flex-shrink: 0;
         }
         .site-topbar-stats li {
@@ -158,21 +156,38 @@ export default function Header() {
         .site-topbar-brands {
           display: flex;
           align-items: center;
-          gap: var(--space-4);
-          margin: 0;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          color: #bfe3ff;
+          flex-wrap: wrap;
+          gap: var(--space-2) var(--space-3);
+          min-width: 0;
         }
-        .site-topbar-brands span:first-child {
+        .site-topbar-brands-label {
           color: #fff;
           flex-shrink: 0;
+          white-space: nowrap;
         }
-        @media (max-width: 1080px) {
-          .site-topbar-brands {
-            display: none;
-          }
+        .site-topbar-brands-list {
+          list-style: none;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 6px;
+          margin: 0;
+          padding: 0;
+        }
+        .site-topbar-brand-logo {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: #fff;
+          height: 24px;
+          padding: 3px 8px;
+          flex-shrink: 0;
+        }
+        .site-topbar-brand-logo :global(img) {
+          display: block;
+          height: 100%;
+          width: auto;
+          object-fit: contain;
         }
         @media (max-width: 720px) {
           .site-topbar {
