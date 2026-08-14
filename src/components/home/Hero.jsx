@@ -23,11 +23,11 @@ export default function Hero() {
             all types of home appliances. We ensure quality service and
             doorstep convenience across Kolkata.
           </p>
-          <div className="hero-trust-grid">
+          <div className="hero-trust-list">
             {trustPoints.map(({ icon: Icon, label }) => (
               <div className="hero-trust-item" key={label}>
                 <span className="hero-trust-icon">
-                  <Icon width="20" height="20" />
+                  <Icon width="18" height="18" />
                 </span>
                 <span>{label}</span>
               </div>
@@ -35,91 +35,91 @@ export default function Hero() {
           </div>
           <div className="hero-ctas">
             <BookButton size="lg" label="Book Your Service" />
-            <CallButton variant="secondary" size="lg" />
+            <CallButton size="lg" />
           </div>
         </div>
         <div className="hero-media">
           <Image
             src="/images/hero/hero-technician.webp"
             alt="Coolviro Services technician with AC, refrigerator, geyser, microwave and washing machine"
-            width={736}
-            height={1024}
+            fill
             priority
-            sizes="(max-width: 900px) 85vw, 500px"
+            sizes="(max-width: 900px) 42vw, 48vw"
+            style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
           />
+          <div className="hero-media-fade" aria-hidden="true" />
         </div>
       </div>
       <style jsx>{`
         .hero {
-          background: var(--gradient-hero);
-          color: #fff;
-          padding: var(--space-8) 0;
           position: relative;
           overflow: hidden;
-        }
-        .hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.15), transparent 55%);
+          background: linear-gradient(180deg, #eef6ff 0%, #e3f0fd 100%);
+          padding: var(--space-9) 0 var(--space-8);
         }
         .hero-inner {
           position: relative;
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          gap: var(--space-7);
+          min-height: 560px;
         }
         .hero-copy {
-          max-width: 560px;
+          position: relative;
+          z-index: 1;
+          max-width: 52%;
+          padding-right: var(--space-5);
         }
         .hero-pill {
           display: inline-block;
-          background: rgba(255, 255, 255, 0.14);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          color: #fff;
+          background: #fff;
+          border: 1px solid var(--color-border);
+          color: var(--color-primary);
           font-weight: 700;
           font-size: 0.85rem;
           padding: var(--space-2) var(--space-4);
           border-radius: var(--radius-full);
           margin-bottom: var(--space-4);
+          box-shadow: var(--shadow-sm);
         }
         .hero h1 {
-          color: #fff;
+          color: var(--color-text);
           margin-bottom: var(--space-4);
         }
         .hero-highlight {
-          color: #bfe3ff;
+          color: var(--color-primary);
         }
         .hero-subtitle {
-          color: #e0f2ff;
+          color: var(--color-text-muted);
           font-size: 1.05rem;
           max-width: 56ch;
           margin-bottom: var(--space-5);
         }
-        .hero-trust-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--space-3);
+        .hero-trust-list {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-2);
           margin-bottom: var(--space-6);
         }
         .hero-trust-item {
           display: flex;
           align-items: center;
-          gap: var(--space-2);
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          padding: var(--space-3);
+          gap: var(--space-3);
+          background: #fff;
+          border: 1px solid var(--color-border);
+          padding: var(--space-2) var(--space-4);
           border-radius: var(--radius-md);
-          font-weight: 600;
-          font-size: 0.85rem;
+          font-weight: 700;
+          font-size: 0.92rem;
+          color: var(--color-text);
+          box-shadow: var(--shadow-sm);
         }
         .hero-trust-icon {
           flex-shrink: 0;
           width: 32px;
           height: 32px;
           border-radius: var(--radius-full);
-          background: rgba(255, 255, 255, 0.16);
+          background: var(--color-bg-section);
+          color: var(--color-primary);
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -129,47 +129,42 @@ export default function Hero() {
           flex-wrap: wrap;
           gap: var(--space-3);
         }
-        .hero-ctas :global(.btn-secondary) {
-          background: rgba(255, 255, 255, 0.08);
-          color: #fff;
-          border-color: rgba(255, 255, 255, 0.5);
-        }
-        .hero-ctas :global(.btn-secondary:hover) {
-          background: rgba(255, 255, 255, 0.18);
-        }
         .hero-media {
-          flex-shrink: 0;
-          width: 460px;
-          border-radius: var(--radius-lg);
-          overflow: hidden;
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: 48%;
         }
         .hero-media :global(img) {
           display: block;
-          width: 100%;
-          height: auto;
         }
-        @media (max-width: 1150px) {
+        .hero-media-fade {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, #eef6ff 0%, rgba(238, 246, 255, 0) 12%);
+          pointer-events: none;
+        }
+        @media (max-width: 1100px) {
+          .hero-copy {
+            max-width: 56%;
+          }
           .hero-media {
-            width: 380px;
+            width: 44%;
           }
         }
-        /*
-         * Below 900px the hero switches from a fixed-width image column to
-         * a percentage split (content ~60% / image ~40%) so the photo
-         * stays beside the text instead of dropping to a new row. Sizes
-         * shrink at each narrower tier instead of restructuring further.
-         */
         @media (max-width: 900px) {
           .hero-inner {
-            flex-direction: row;
-            align-items: center;
+            min-height: 0;
+            align-items: stretch;
             gap: var(--space-4);
           }
           .hero-copy {
+            position: static;
             max-width: none;
-            flex: 1 1 60%;
+            flex: 1 1 58%;
             min-width: 0;
+            padding-right: 0;
           }
           .hero-pill {
             font-size: 0.72rem;
@@ -184,15 +179,10 @@ export default function Hero() {
             font-size: 0.85rem;
             margin-bottom: var(--space-4);
           }
-          .hero-trust-grid {
-            grid-template-columns: 1fr;
-            gap: var(--space-2);
-            margin-bottom: var(--space-4);
-          }
           .hero-trust-item {
-            padding: var(--space-2);
-            font-size: 0.75rem;
-            gap: 6px;
+            padding: var(--space-2) var(--space-3);
+            font-size: 0.78rem;
+            gap: 8px;
           }
           .hero-trust-icon {
             width: 26px;
@@ -208,10 +198,17 @@ export default function Hero() {
             font-size: 0.9rem;
           }
           .hero-media {
-            flex: 0 0 38%;
-            width: 38%;
-            max-width: none;
-            margin: 0;
+            position: relative;
+            top: auto;
+            bottom: auto;
+            right: auto;
+            flex: 0 0 40%;
+            width: 40%;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+          }
+          .hero-media-fade {
+            display: none;
           }
         }
         @media (max-width: 640px) {
@@ -235,8 +232,8 @@ export default function Hero() {
             margin-bottom: var(--space-3);
           }
           .hero-trust-item {
-            font-size: 0.68rem;
-            padding: 6px;
+            font-size: 0.7rem;
+            padding: 6px var(--space-2);
           }
           .hero-trust-icon {
             width: 22px;
@@ -247,8 +244,8 @@ export default function Hero() {
             font-size: 0.82rem;
           }
           .hero-media {
-            flex-basis: 36%;
-            width: 36%;
+            flex-basis: 38%;
+            width: 38%;
           }
         }
       `}</style>
