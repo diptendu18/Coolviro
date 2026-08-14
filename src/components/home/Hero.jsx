@@ -154,37 +154,101 @@ export default function Hero() {
             width: 380px;
           }
         }
+        /*
+         * Below 900px the hero switches from a fixed-width image column to
+         * a percentage split (content ~60% / image ~40%) so the photo
+         * stays beside the text instead of dropping to a new row. Sizes
+         * shrink at each narrower tier instead of restructuring further.
+         */
         @media (max-width: 900px) {
           .hero-inner {
-            flex-direction: column;
-            align-items: stretch;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-4);
           }
           .hero-copy {
             max-width: none;
+            flex: 1 1 60%;
+            min-width: 0;
+          }
+          .hero-pill {
+            font-size: 0.72rem;
+            padding: 6px var(--space-3);
+            margin-bottom: var(--space-3);
+          }
+          .hero h1 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-3);
+          }
+          .hero-subtitle {
+            font-size: 0.85rem;
+            margin-bottom: var(--space-4);
+          }
+          .hero-trust-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+          }
+          .hero-trust-item {
+            padding: var(--space-2);
+            font-size: 0.75rem;
+            gap: 6px;
+          }
+          .hero-trust-icon {
+            width: 26px;
+            height: 26px;
+          }
+          .hero-ctas {
+            flex-direction: column;
+            gap: var(--space-2);
+          }
+          .hero-ctas :global(.btn) {
+            width: 100%;
+            padding: 0.8rem 1.1rem;
+            font-size: 0.9rem;
           }
           .hero-media {
-            width: 100%;
-            max-width: 340px;
-            margin: 0 auto;
+            flex: 0 0 38%;
+            width: 38%;
+            max-width: none;
+            margin: 0;
           }
         }
         @media (max-width: 640px) {
           .hero {
-            padding: var(--space-7) 0;
-          }
-          .hero-trust-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-          .hero-ctas {
-            flex-direction: column;
-          }
-          .hero-ctas :global(.btn) {
-            width: 100%;
+            padding: var(--space-6) 0;
           }
         }
-        @media (max-width: 380px) {
-          .hero-trust-grid {
-            grid-template-columns: 1fr;
+        @media (max-width: 480px) {
+          .hero-inner {
+            gap: var(--space-3);
+          }
+          .hero-pill {
+            font-size: 0.65rem;
+            padding: 5px var(--space-2);
+          }
+          .hero h1 {
+            font-size: 1.2rem;
+          }
+          .hero-subtitle {
+            font-size: 0.78rem;
+            margin-bottom: var(--space-3);
+          }
+          .hero-trust-item {
+            font-size: 0.68rem;
+            padding: 6px;
+          }
+          .hero-trust-icon {
+            width: 22px;
+            height: 22px;
+          }
+          .hero-ctas :global(.btn) {
+            padding: 0.68rem 0.9rem;
+            font-size: 0.82rem;
+          }
+          .hero-media {
+            flex-basis: 36%;
+            width: 36%;
           }
         }
       `}</style>
