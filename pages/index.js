@@ -1,5 +1,6 @@
 import SEO from '@/components/seo/SEO';
 import Hero from '@/components/home/Hero';
+import BrandLogosStrip from '@/components/home/BrandLogosStrip';
 import ServicesGrid from '@/components/home/ServicesGrid';
 import HowItWorks from '@/components/home/HowItWorks';
 import TrustSection from '@/components/home/TrustSection';
@@ -16,6 +17,7 @@ export default function HomePage() {
         path="/"
       />
       <Hero />
+      <BrandLogosStrip />
       <ServicesGrid />
       <HowItWorks />
       <TrustSection />

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { CallButton, BookButton } from '@/components/ui/CTAButtons';
+import { CallButton, BookButton, WhatsappButton } from '@/components/ui/CTAButtons';
 import { ShieldCheckIcon, DoorstepIcon, ToolboxIcon, BadgeCheckIcon } from '@/components/ui/Icons';
 
 const trustPoints = [
@@ -36,6 +36,7 @@ export default function Hero() {
           <div className="hero-ctas">
             <BookButton size="lg" label="Book Your Service" />
             <CallButton size="lg" />
+            <WhatsappButton size="lg" />
           </div>
         </div>
         <div className="hero-media">

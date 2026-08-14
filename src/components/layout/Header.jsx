@@ -39,22 +39,28 @@ export default function Header() {
               <BadgeCheckIcon width="16" height="16" /> {site.warrantyHighlight}
             </li>
           </ul>
-          <div className="site-topbar-brands">
-            <span className="site-topbar-brands-label">We Repair All Major Brands</span>
-            <ul className="site-topbar-brands-list">
-              {topBrandLogos.map((brand) => (
-                <li key={brand.name} className="site-topbar-brand-logo">
-                  <Image
-                    src={brand.image}
-                    alt={brand.name}
-                    width={brand.width}
-                    height={brand.height}
-                    sizes="80px"
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* On the homepage this same strip is rendered lower on the page
+              (between Hero and Our Services) via BrandLogosStrip — kept
+              here in the topbar for every other page so nothing else on
+              the site changes. */}
+          {router.pathname !== '/' && (
+            <div className="site-topbar-brands">
+              <span className="site-topbar-brands-label">We Repair All Major Brands</span>
+              <ul className="site-topbar-brands-list">
+                {topBrandLogos.map((brand) => (
+                  <li key={brand.name} className="site-topbar-brand-logo">
+                    <Image
+                      src={brand.image}
+                      alt={brand.name}
+                      width={brand.width}
+                      height={brand.height}
+                      sizes="80px"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
