@@ -39,7 +39,7 @@ function buildFaqs(brand, service) {
     },
     {
       q: `How do I book a ${brand} ${shortLower} service in Kolkata?`,
-      a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 82401 06770.',
+      a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 79803 49872.',
     },
   ];
 }

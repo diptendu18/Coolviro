@@ -67,16 +67,24 @@ export default function ServiceCard({ service }) {
           font-weight: 700 !important;
           font-size: 1rem !important;
         }
-        .service-card-link {
+        :global(.service-card-link) {
           margin-top: var(--space-2);
+          align-self: flex-start;
           display: inline-flex;
           align-items: center;
-          gap: 4px;
+          gap: 6px;
           font-weight: 700;
+          font-size: 0.9rem;
           color: var(--color-primary);
+          background: var(--color-bg-section);
+          padding: 0.6rem 1.1rem;
+          border-radius: var(--radius-full);
+          transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
         }
-        .service-card-link:hover {
-          text-decoration: underline;
+        :global(.service-card-link:hover) {
+          background: #dceeff;
+          box-shadow: 0 6px 16px rgba(0, 102, 255, 0.15);
+          transform: translateY(-1px);
         }
       `}</style>
     </article>

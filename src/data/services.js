@@ -85,7 +85,7 @@ export const services = [
       },
       {
         q: 'How do I book an AC service in Kolkata?',
-        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 82401 06770.',
+        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 79803 49872.',
       },
     ],
   },
@@ -165,7 +165,7 @@ export const services = [
       },
       {
         q: 'How do I book a refrigerator repair in Kolkata?',
-        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 82401 06770.',
+        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 79803 49872.',
       },
     ],
   },
@@ -244,7 +244,7 @@ export const services = [
       },
       {
         q: 'How do I book a geyser repair in Kolkata?',
-        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 82401 06770.',
+        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 79803 49872.',
       },
     ],
   },
@@ -323,7 +323,7 @@ export const services = [
       },
       {
         q: 'How do I book a microwave oven repair in Kolkata?',
-        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 82401 06770.',
+        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 79803 49872.',
       },
     ],
   },
@@ -402,7 +402,7 @@ export const services = [
       },
       {
         q: 'How do I book a washing machine repair in Kolkata?',
-        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 82401 06770.',
+        a: 'You can book online using our booking form, or simply call or WhatsApp us at +91 79803 49872.',
       },
     ],
   },

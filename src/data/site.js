@@ -9,12 +9,12 @@ export const site = {
   region: 'West Bengal',
   country: 'India',
 
-  phoneDisplay: '+91 82401 06770',
-  phoneHref: 'tel:+918240106770',
-  whatsappDisplay: '+91 82401 06770',
-  whatsappHref: 'https://wa.me/918240106770',
+  phoneDisplay: '+91 79803 49872',
+  phoneHref: 'tel:+917980349872',
+  whatsappDisplay: '+91 79803 49872',
+  whatsappHref: 'https://wa.me/917980349872',
   whatsappHrefWithText: (text) =>
-    `https://wa.me/918240106770${text ? `?text=${encodeURIComponent(text)}` : ''}`,
+    `https://wa.me/917980349872${text ? `?text=${encodeURIComponent(text)}` : ''}`,
 
   workingHours: '10:00 AM – 8:00 PM',
   workingDaysNote: 'Open all week, 10:00 AM – 8:00 PM',

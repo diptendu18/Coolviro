@@ -9,7 +9,7 @@ export default function ContactPage() {
     <>
       <SEO
         title="Contact Us"
-        description="Contact Coolviro Services for home appliance repair in Kolkata. Call or WhatsApp +91 82401 06770, or book a service online. Open 10:00 AM – 8:00 PM."
+        description="Contact Coolviro Services for home appliance repair in Kolkata. Call or WhatsApp +91 79803 49872, or book a service online. Open 10:00 AM – 8:00 PM."
         path="/contact"
       />
       <div className="container">

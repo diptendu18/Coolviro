@@ -283,15 +283,18 @@ textarea:focus-visible,
 
 .btn-secondary:hover {
   background: var(--color-bg-section);
+  box-shadow: 0 8px 20px rgba(0, 102, 255, 0.15);
 }
 
 .btn-whatsapp {
   background: #25d366;
   color: #fff;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
 }
 
 .btn-whatsapp:hover {
   background: #20bd5a;
+  box-shadow: 0 12px 26px rgba(37, 211, 102, 0.35);
 }
 
 .btn-ghost {
@@ -303,6 +306,7 @@ textarea:focus-visible,
 .btn-ghost:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
+  box-shadow: 0 8px 20px rgba(0, 102, 255, 0.12);
 }
 
 .btn-block {

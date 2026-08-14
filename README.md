@@ -110,8 +110,8 @@ Once real SMTP credentials are set as environment variables on your hosting prov
 The phone number is centralized in `src/data/site.js`:
 
 ```js
-phoneDisplay: '+91 82401 06770',
-phoneHref: 'tel:+918240106770',
+phoneDisplay: '+91 79803 49872',
+phoneHref: 'tel:+917980349872',
 ```
 
 Every "Call Now" button across the site uses these values. To change the number, edit this one file.
@@ -121,8 +121,8 @@ Every "Call Now" button across the site uses these values. To change the number,
 Also in `src/data/site.js`:
 
 ```js
-whatsappDisplay: '+91 82401 06770',
-whatsappHref: 'https://wa.me/918240106770',
+whatsappDisplay: '+91 79803 49872',
+whatsappHref: 'https://wa.me/917980349872',
 ```
 
 Every "WhatsApp Us" button uses these values (some also pre-fill a message via `whatsappHrefWithText`).
@@ -252,7 +252,7 @@ Before deploying, verify locally (`npm run dev`):
 
 - [ ] Homepage, Services index, all 5 service pages, Areas, About, Contact load correctly
 - [ ] Header nav + hamburger menu work on mobile (open/close, keyboard accessible, Escape closes)
-- [ ] Call Now (`tel:+918240106770`) and WhatsApp Us (`https://wa.me/918240106770`) links work
+- [ ] Call Now (`tel:+917980349872`) and WhatsApp Us (`https://wa.me/917980349872`) links work
 - [ ] Every "Book Online" / "Book a Service" / "Book Now" button scrolls to or opens the booking form
 - [ ] Booking form: required-field validation, Indian mobile/pincode validation, dynamic Appliance Type options per Service, success message, and dev-mode console logging all work
 - [ ] Responsive at mobile / tablet / desktop widths — no horizontal scroll, no clipped text, no overlapping elements
