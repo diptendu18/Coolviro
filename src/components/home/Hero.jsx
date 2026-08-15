@@ -13,17 +13,19 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="container hero-inner">
-        <div className="hero-copy animate-in">
-          <span className="hero-pill">Fast. Reliable. Affordable.</span>
-          <h1>
-            Expert Care for Your <span className="hero-highlight">Home Appliances</span>
-          </h1>
-          <p className="hero-subtitle">
-            Coolviro Services provides professional repair and maintenance for
-            all types of home appliances. We ensure quality service and
-            doorstep convenience across Kolkata.
-          </p>
-          <div className="hero-trust-list">
+        <div className="hero-copy">
+          <div className="hero-copy-top animate-in">
+            <span className="hero-pill">Fast. Reliable. Affordable.</span>
+            <h1>
+              Expert Care for Your <span className="hero-highlight">Home Appliances</span>
+            </h1>
+            <p className="hero-subtitle">
+              Coolviro Services provides professional repair and maintenance for
+              all types of home appliances. We ensure quality service and
+              doorstep convenience across Kolkata.
+            </p>
+          </div>
+          <div className="hero-trust-list animate-in">
             {trustPoints.map(({ icon: Icon, label }) => (
               <div className="hero-trust-item" key={label}>
                 <span className="hero-trust-icon">
@@ -33,7 +35,7 @@ export default function Hero() {
               </div>
             ))}
           </div>
-          <div className="hero-ctas">
+          <div className="hero-ctas animate-in">
             <BookButton size="lg" label="Book Your Service" />
             <CallButton size="lg" />
             <WhatsappButton size="lg" />
@@ -156,17 +158,38 @@ export default function Hero() {
           }
         }
         @media (max-width: 900px) {
+          /* A fixed-shape image can never fill the height of the full copy
+             column (badge + heading + subtitle + 4 trust items + 3 CTA
+             buttons) — forcing it to match that height crops the photo
+             down to almost nothing, while sizing it by its own aspect
+             ratio leaves a large gap underneath it next to the taller
+             text, making the image look stranded off to the side.
+
+             Fix: place the image beside only the TOP of the copy (badge +
+             heading + subtitle), which is naturally close to the photo's
+             own height, via CSS grid — hero-copy becomes display:contents
+             so its children act as direct grid items instead of one tall
+             flex column. The trust list and CTA buttons then span the
+             full width in their own row below both columns, so there's
+             no leftover empty space beside them either. */
           .hero-inner {
+            display: grid;
+            grid-template-columns: 55% 45%;
+            grid-template-areas:
+              'top image'
+              'trust trust'
+              'ctas ctas';
+            column-gap: var(--space-4);
+            row-gap: var(--space-4);
+            align-items: start;
             min-height: 0;
-            align-items: stretch;
-            gap: var(--space-4);
           }
           .hero-copy {
-            position: static;
-            max-width: none;
-            flex: 1 1 55%;
+            display: contents;
+          }
+          .hero-copy-top {
+            grid-area: top;
             min-width: 0;
-            padding-right: 0;
           }
           .hero-pill {
             font-size: 0.72rem;
@@ -174,12 +197,15 @@ export default function Hero() {
             margin-bottom: var(--space-3);
           }
           .hero h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: var(--space-3);
           }
           .hero-subtitle {
-            font-size: 0.85rem;
-            margin-bottom: var(--space-4);
+            font-size: 0.82rem;
+            margin-bottom: 0;
+          }
+          .hero-trust-list {
+            grid-area: trust;
           }
           .hero-trust-item {
             padding: var(--space-2) var(--space-3);
@@ -191,6 +217,7 @@ export default function Hero() {
             height: 26px;
           }
           .hero-ctas {
+            grid-area: ctas;
             flex-direction: column;
             gap: var(--space-2);
           }
@@ -200,37 +227,23 @@ export default function Hero() {
             font-size: 0.9rem;
           }
           .hero-media {
+            grid-area: image;
             position: relative;
             top: auto;
             bottom: auto;
             right: auto;
-            flex: 0 0 45%;
-            width: 45%;
-            /* Below 900px the copy column (pill + heading + trust list +
-               3 CTA buttons) is far taller than this image is wide, so
-               align-items:stretch above forced this narrow box to match
-               that height — object-fit:cover then had to zoom in hugely
-               to cover it, cropping nearly everything but a sliver of
-               the technician. Giving the box its own fixed aspect ratio
-               instead, and opting out of the stretch via align-self,
-               decouples its height from the copy column entirely.
-
-               A 1:1 box (rather than the photo's full 736:1024 portrait
-               ratio) keeps the box compact instead of towering
-               alongside the text: at 45% width it crops only the
-               bottom ~28% of the original photo — the tool belt and
-               legs, below where the crossed arms end — while the AC
-               unit, geyser, face and torso at the top stay fully in
-               frame with zero zoom beyond what cover needs to fill a
-               near-square box from a slightly taller source photo. */
-            aspect-ratio: 1 / 1;
+            width: 100%;
+            /* The full, uncropped photo ratio — matched against just the
+               badge+heading+subtitle block instead of the whole copy
+               column, this is close enough in height that object-fit:
+               contain shows the complete image with no meaningful gap. */
+            aspect-ratio: 736 / 1024;
             height: auto;
-            align-self: flex-start;
             border-radius: var(--radius-lg);
             overflow: hidden;
           }
           .hero-media :global(img) {
-            object-fit: cover;
+            object-fit: contain;
             object-position: center top;
           }
           .hero-media-fade {
@@ -255,7 +268,7 @@ export default function Hero() {
           }
           .hero-subtitle {
             font-size: 0.78rem;
-            margin-bottom: var(--space-3);
+            margin-bottom: 0;
           }
           .hero-trust-item {
             font-size: 0.7rem;
