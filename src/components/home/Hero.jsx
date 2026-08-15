@@ -164,7 +164,7 @@ export default function Hero() {
           .hero-copy {
             position: static;
             max-width: none;
-            flex: 1 1 58%;
+            flex: 1 1 55%;
             min-width: 0;
             padding-right: 0;
           }
@@ -204,24 +204,33 @@ export default function Hero() {
             top: auto;
             bottom: auto;
             right: auto;
-            flex: 0 0 40%;
-            width: 40%;
+            flex: 0 0 45%;
+            width: 45%;
             /* Below 900px the copy column (pill + heading + trust list +
                3 CTA buttons) is far taller than this image is wide, so
                align-items:stretch above forced this narrow box to match
                that height — object-fit:cover then had to zoom in hugely
-               to cover it, cropping most of the frame. Sizing the box by
-               the photo's own aspect ratio instead, and opting out of
-               the stretch, means the full photo always fits with zero
-               cropping regardless of how tall the copy column gets. */
-            aspect-ratio: 736 / 1024;
+               to cover it, cropping nearly everything but a sliver of
+               the technician. Giving the box its own fixed aspect ratio
+               instead, and opting out of the stretch via align-self,
+               decouples its height from the copy column entirely.
+
+               A 1:1 box (rather than the photo's full 736:1024 portrait
+               ratio) keeps the box compact instead of towering
+               alongside the text: at 45% width it crops only the
+               bottom ~28% of the original photo — the tool belt and
+               legs, below where the crossed arms end — while the AC
+               unit, geyser, face and torso at the top stay fully in
+               frame with zero zoom beyond what cover needs to fill a
+               near-square box from a slightly taller source photo. */
+            aspect-ratio: 1 / 1;
             height: auto;
             align-self: flex-start;
             border-radius: var(--radius-lg);
             overflow: hidden;
           }
           .hero-media :global(img) {
-            object-fit: contain;
+            object-fit: cover;
             object-position: center top;
           }
           .hero-media-fade {
@@ -257,12 +266,9 @@ export default function Hero() {
             height: 22px;
           }
           .hero-ctas :global(.btn) {
-            padding: 0.68rem 0.9rem;
-            font-size: 0.82rem;
-          }
-          .hero-media {
-            flex-basis: 38%;
-            width: 38%;
+            padding: 0.68rem 0.6rem;
+            font-size: 0.8rem;
+            gap: 6px;
           }
         }
       `}</style>
