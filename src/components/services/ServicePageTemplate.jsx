@@ -5,6 +5,7 @@ import ServiceSchema from '@/components/seo/ServiceSchema';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import ServiceCard from '@/components/ui/ServiceCard';
 import FAQAccordion from '@/components/ui/FAQAccordion';
+import HelpContactNote from '@/components/ui/HelpContactNote';
 import { CallButton, WhatsappButton, BookButton } from '@/components/ui/CTAButtons';
 import { CheckIcon, ShieldCheckIcon, ChevronRightIcon } from '@/components/ui/Icons';
 import { services } from '@/data/services';
@@ -168,6 +169,7 @@ export default function ServicePageTemplate({ service }) {
               <ServiceCard key={s.slug} service={s} />
             ))}
           </div>
+          <HelpContactNote />
         </div>
       </section>
 

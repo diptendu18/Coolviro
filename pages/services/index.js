@@ -1,6 +1,7 @@
 import SEO from '@/components/seo/SEO';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import ServiceCard from '@/components/ui/ServiceCard';
+import HelpContactNote from '@/components/ui/HelpContactNote';
 import { CallButton, WhatsappButton, BookButton } from '@/components/ui/CTAButtons';
 import { services } from '@/data/services';
 import { site } from '@/data/site';
@@ -31,6 +32,7 @@ export default function ServicesIndexPage() {
               <ServiceCard key={service.slug} service={service} />
             ))}
           </div>
+          <HelpContactNote />
         </div>
       </section>
 

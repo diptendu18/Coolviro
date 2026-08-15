@@ -5,6 +5,7 @@ import ServiceSchema from '@/components/seo/ServiceSchema';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import ApplianceArt from '@/components/ui/ApplianceArt';
 import FAQAccordion from '@/components/ui/FAQAccordion';
+import HelpContactNote from '@/components/ui/HelpContactNote';
 import { CallButton, WhatsappButton, BookButton } from '@/components/ui/CTAButtons';
 import {
   CheckIcon,
@@ -234,6 +235,7 @@ export default function BrandServicePageTemplate({ brandPage }) {
               </Link>
             ))}
           </div>
+          <HelpContactNote />
         </div>
       </section>
 
