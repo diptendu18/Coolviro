@@ -46,7 +46,6 @@ export default function Hero() {
             fill
             priority
             sizes="(max-width: 900px) 42vw, 48vw"
-            style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
           />
           <div className="hero-media-fade" aria-hidden="true" />
         </div>
@@ -139,6 +138,8 @@ export default function Hero() {
         }
         .hero-media :global(img) {
           display: block;
+          object-fit: cover;
+          object-position: center 15%;
         }
         .hero-media-fade {
           position: absolute;
@@ -205,8 +206,23 @@ export default function Hero() {
             right: auto;
             flex: 0 0 40%;
             width: 40%;
+            /* Below 900px the copy column (pill + heading + trust list +
+               3 CTA buttons) is far taller than this image is wide, so
+               align-items:stretch above forced this narrow box to match
+               that height — object-fit:cover then had to zoom in hugely
+               to cover it, cropping most of the frame. Sizing the box by
+               the photo's own aspect ratio instead, and opting out of
+               the stretch, means the full photo always fits with zero
+               cropping regardless of how tall the copy column gets. */
+            aspect-ratio: 736 / 1024;
+            height: auto;
+            align-self: flex-start;
             border-radius: var(--radius-lg);
             overflow: hidden;
+          }
+          .hero-media :global(img) {
+            object-fit: contain;
+            object-position: center top;
           }
           .hero-media-fade {
             display: none;
