@@ -193,6 +193,47 @@ This is a standard Next.js app (Pages Router) with one serverless API route (`/a
 
 No database or payment gateway is required for the Next.js app itself — its only server-side piece is the booking email API route. The customer review system (below) is a separate PHP + MySQL application, hosted independently on Hostinger, not part of this Next.js deployment.
 
+### Deploying to Hostinger
+
+Hostinger has two fundamentally different hosting types, and which one applies changes the deployment method:
+
+**A. Hostinger plans with Node.js app support** (Business/Premium shared hosting and above, Cloud, VPS — check hPanel → *Advanced* or *Websites* → *Node.js*):
+
+This is the recommended path — it requires **zero code changes** from what's in this repo.
+
+- Connect the GitHub repo in hPanel's Node.js app setup (or `git pull` on a VPS).
+- **Node.js version:** 18.18.0 or newer (see `engines` in `package.json`).
+- **Install command:** `npm install`
+- **Build command:** `npm run build`
+- **Startup file / run command:** `npm start` (runs `next start`, which serves the app on port 3000 by default — Hostinger's Node.js setup lets you set the port it proxies to).
+- Set the environment variables from `.env.example` (`SITE_URL`, SMTP credentials if email is wanted, etc.) in hPanel's Node.js environment variables screen.
+- No `.htaccess` is needed for routing — Next.js's own router serves every page correctly. If Hostinger fronts the Node app with Apache/LiteSpeed as a reverse proxy, hPanel generates the required proxy `.htaccess` automatically as part of the Node.js app setup; you don't need to hand-write one.
+
+**B. Hostinger plans without Node.js support** (plain shared hosting, Apache/PHP only — no way to run a persistent Node process):
+
+Next.js can still be deployed here, but only as a **static export**, which does require code changes (not made in this pass, since it's a real functional trade-off — see below):
+
+- Add `output: 'export'` to `next.config.js`.
+- Set `images: { unoptimized: true }` — the on-the-fly image optimizer (`/_next/image`) needs a Node server and isn't available on static hosting, so images are served at their original file size instead of automatically resized per device.
+- Remove or relocate `pages/api/booking.js` — Next.js's static export refuses to build if any API routes exist, since they have no server to run on. (This route is already unused by the UI — the booking form's "Submit Booking" button opens WhatsApp directly, see §9 — so removing it costs no functionality today.)
+- Build with `npm run build`, which now produces a static `out/` folder — that folder's *contents* (not the folder itself) are what get uploaded to `public_html`.
+- Next.js's static export pre-renders every route to its own real `.html` file (e.g. `/about` → `about.html` / `about/index.html`), unlike a client-only SPA (Create React App, Vite + React Router) that ships a single `index.html` and needs an Apache rewrite rule so deep links don't 404 on refresh. That SPA-specific problem doesn't apply here — direct navigation and refreshes on any route work out of the box on static hosting with no rewrite rules needed.
+- The security headers currently set in `next.config.js`'s `headers()` function only run inside the Next.js server, so they don't apply to a static export — add them via `.htaccess` instead if they matter for this deployment:
+  ```apache
+  <IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+  </IfModule>
+  <IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html "access plus 0 seconds"
+  </IfModule>
+  ErrorDocument 404 /404.html
+  ```
+
+If you're not sure which type your Hostinger plan is, check hPanel — if there's a "Node.js" option under Websites/Advanced, use path A.
+
 ## 17. Customer Review System (Hostinger PHP + MySQL)
 
 Genuine customer reviews are stored permanently in MySQL and moderated
